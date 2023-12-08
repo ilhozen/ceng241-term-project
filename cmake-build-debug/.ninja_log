@@ -1,3 +1,7 @@
 # ninja log v5
 0	285	7225566162812126	CMakeFiles/Project.dir/main.cpp.obj	b0b33717dd019d5
 286	436	7225566164286351	Project.exe	43383aa3fce17d16
+2	467	7237715811413425	CMakeFiles/Project.dir/main.cpp.obj	b0b33717dd019d5
+467	602	7237715812747564	Project.exe	43383aa3fce17d16
+2	227	7237756295980982	CMakeFiles/Project.dir/main.cpp.obj	b0b33717dd019d5
+227	296	7237756296649622	Project.exe	43383aa3fce17d16
