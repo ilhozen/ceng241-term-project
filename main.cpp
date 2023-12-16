@@ -46,6 +46,46 @@ void combine(ExperimentMaterial mat1, ExperimentMaterial mat2){
         mat2.setUsed(0);
     }
 }
+class Lock{
+	protected:
+		int code;
+		bool opened;
+		};
+	public:
+		void setcode(code){this->code=code}
+		string getcode() { return code;} 
+		void opened(int A){
+        if (A == 1){
+            opened = true;
+        }else{
+            opened = false;
+        }
+        };
+		int check_code(string entered_code){
+			if(entered_code== *******){
+				return (opened(1));
+			}
+			else 
+				return opened(0);
+		}
+};
+class DoorLock:public Lock{
+    private:
+		string symbol_code;
+	public:
+		void setsymbol_code(char entered_symbol) { symbol_code= entered_symbol  };
+		char getsymbol_code() { return symbol_code };
+		
+};
+class ComputerLock:public Lock{
+	 private:
+		string symbol_code;
+	public:
+		void setsymbol_code(char entered_symbol) { symbol_code= entered_symbol  };
+		char getsymbol_code() { return symbol_code };
+		
+	
+};
 
 int main() {
     
