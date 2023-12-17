@@ -127,7 +127,61 @@ class ComputerLock:public Lock{
 		char getsymbol_code() { return symbol_code };
 		
 	
-};*/
+};
+
+int printBasement() //printing menu for the room 1: Basement
+{
+	int investigateChoice;
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+	cout << "-                                   BASEMENT                                   -" << endl;
+	cout << "-     1. Desk                                                                  -" << endl;
+	cout << "-     2. Boxes                                                                 -" << endl;
+	cout << "-     3. Calendar                                                              -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "      Choose to investigate: ";
+	cin >> investigateChoice;
+	return investigateChoice;
+}
+
+int printBasement_Desk() //printing menu for the desk in Basement
+{
+	int investigateChoice;
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+	cout << "-                                     DESK                                     -" << endl;
+	cout << "-     1. Computer                                                              -" << endl;
+	cout << "-     2. Control Notebook                                                      -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "      Choose to investigate: ";
+	cin >> investigateChoice;
+	return investigateChoice;
+}
+
+int printLab() //printing menu for the room 2: Laboratory
+{
+	int investigateChoice;
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+	cout << "-                                  LABORATORY                                  -" << endl;
+	cout << "-     1. Desk                                                                  -" << endl;
+	cout << "-     2. Lab Equipments                                                        -" << endl;
+	cout << "-     3. Clock                                                                 -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "      Choose to investigate: ";
+	cin >> investigateChoice;
+	return investigateChoice;	
+}
+
+int printLab_Desk() //printing menu for the desk in Laboratory
+{
+	int investigateChoice;
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+	cout << "-                                     DESK                                     -" << endl;
+	cout << "-     1. Picture                                                               -" << endl;
+	cout << "-     2. Notebook                                                              -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "      Choose to investigate: ";
+	cin >> investigateChoice;
+	return investigateChoice;
+}
 
 int main() {
     
@@ -154,4 +208,27 @@ int main() {
 	for(int i = 0 ; i < 5 ; i++){
 		notebookOfCompounds.setText(compounds[i]);
 	}
+	
+	/*   hikaye için yazım fikri
+
+	cout << "--------------------------------------------------------------------------------" << endl;
+	cout << "-             Henry : What do you mean that you can not find him?!             -" << endl;
+	cout << "-                                [press SPACE]                                 -" << endl;
+	cout << "--------------------------------------------------------------------------------" << endl;
+	*/
+	
+	int investigateChoice;
+	investigateChoice = printBasement();
+	if(investigateChoice == 1)
+	{
+		investigateChoice = printBasement_Desk();
+	}
+	
+	
+	investigateChoice = printLab();
+	if(investigateChoice == 1)
+	{
+		investigateChoice = printLab_Desk();
+	}
+	
 }
