@@ -128,6 +128,18 @@ class ComputerLock:public Lock{
 		string getsymbol_code() { return symbol_code ;}
 		
 };
+class Note{
+private:
+    string hint;
+    int id;
+public:
+    Note(string hint, int id)
+    : hint(hint), id(id){}
+
+    string getString() const {return hint;}
+
+    int getId() const {return id;}
+};
 
 int printBasement() //printing menu for the room 1: Basement
 {
