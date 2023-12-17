@@ -25,7 +25,7 @@ class Box: public Item
 
 class ExperimentMaterial: public Item
 {
-private:
+protected:
     bool used;
 public:
     bool isUsed(){ return used; }
@@ -94,20 +94,21 @@ class Lock{
 		int code;
 		bool opened;
 	public:
-		void setcode(int code){this->code=code}
-		string getcode() { return code;} 
-		void opened(int A){
-        if (A == 1){
-            opened = true;
-        }else{
-            opened = false;
+		void setcode(int code){this->code=code;}
+		int getcode() { return code;} 
+		void isOpened(int A){
+        	if (A == 1){
+            	opened = true;
+        	}else{
+            	opened = false;
+        	}
         }
-		int check_code(string entered_code){
-			if(entered_code== *******){
-				return (opened(1));
+		void check_code(string entered_code){
+			if(entered_code == "*******"){
+				isOpened(1);
 			}
 			else 
-				return opened(0);
+				isOpened(0);
 		}
 };
 
@@ -115,18 +116,17 @@ class DoorLock:public Lock{
     private:
 		string symbol_code;
 	public:
-		void setsymbol_code(char entered_symbol) { symbol_code= entered_symbol  };
-		char getsymbol_code() { return symbol_code };
+		void setsymbol_code(char entered_symbol) { symbol_code = entered_symbol ; }
+		string getsymbol_code() { return symbol_code ;}
 		
 };
 class ComputerLock:public Lock{
 	 private:
 		string symbol_code;
 	public:
-		void setsymbol_code(char entered_symbol) { symbol_code= entered_symbol  };
-		char getsymbol_code() { return symbol_code };
+		void setsymbol_code(char entered_symbol) { symbol_code = entered_symbol ;}
+		string getsymbol_code() { return symbol_code ;}
 		
-	
 };
 
 int printBasement() //printing menu for the room 1: Basement
@@ -193,7 +193,7 @@ int main() {
     	j++;
 	}
 
-	string labEquipment[10] = {"Glasses" , "Coats" , "Flask" , "Gloves" , "Test tube" , "Microscope" , "Funnel" , "Beaker" , "Magnet" , "Pipette"};
+	string labEquipment[10] = {"Glasses" , "Coats" , "Volumetric flask" , "Gloves" , "Test tube" , "Microscope" , "Funnel" , "Beaker" , "Magnet" , "Pipette"};
 	string compounds[5] = {"yellow + red" , "blue + yellow" , "blue + red" , "green + blue" , "green + red"};
 	
 	
