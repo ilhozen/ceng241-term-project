@@ -141,6 +141,15 @@ public:
     int getId() const {return id;}
 };
 
+int checkNote(vector <Note> vec, int a){
+    for (Note p : vec) {
+        if (a == p.getId()){
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void allignMessages(string text)
 {
 	int space, counter;
@@ -274,7 +283,21 @@ int printGreenhouse() //printing menu for room 3 : Greenhouse
 }
 
 int main() {
-    
+
+    vector<Note> personalNotes;
+    Note note1("Test Note 1", 1);
+    Note note2("Test Note 2", 2);
+    Note note3("Test Note 3", 3);
+    Note note4("Test Note 4", 4);
+    Note note5("Test Note 5", 5);
+    personalNotes.push_back(note1);
+    personalNotes.push_back(note3);
+    personalNotes.push_back(note4);
+
+    for(int i = 1; i<=5; i++){
+        cout << "Is Note " << i << " in the vector: " << checkNote(personalNotes, i) << endl;
+    }
+
     Box boxes[10];
     char j = 'A';
     for (int i = 0; i < 10; i++) //assigning symbols to boxes
@@ -309,7 +332,7 @@ int main() {
 	
 	int investigateChoice;
 	
-	do{
+	/*do{
 		investigateChoice = printBasement();
 		if(investigateChoice == 1) //Desk
 		{
@@ -348,5 +371,6 @@ int main() {
 	do{
 		investigateChoice = printGreenhouse();
 	}while(investigateChoice >= 0 && investigateChoice <= 2);
-	
+*/
+return 0;
 }
