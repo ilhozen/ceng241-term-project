@@ -144,16 +144,18 @@ public:
 void allignMessages(string text)
 {
 	int space, counter;
+	cout << "-";
 	for(counter = 1; counter <= 5; counter++)
 	{
 		cout << " ";
 	}
 	cout << text;
-	space = 45 - text.length();
+	space = 73 - text.length();
 	for(counter = 1; counter <= space; counter++)
 	{
 		cout << " ";
 	}
+	cout << "-" << endl;
 }
 
 
@@ -189,6 +191,26 @@ int printBasement_Desk() //printing menu for the desk in Basement
 	return investigateChoice;
 }
 
+void printBasement_Computer() //printing message for the computer (does not have the code)
+{
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+	cout << "-     Enter the password:                                                      -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "-     'Looks like i need to find the password to access camera records...'     -" << endl;
+	cout << "--------------------------------------------------------------------------------" << endl; 
+}
+
+void printBasement_ControlNotebook(string labEquipment[10]) //primting control notebook's content
+{
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+	cout << "-                                 EQUIPMENTS                                   -" << endl;
+	for(int i=0; i < 10; i++)
+	{
+		allignMessages(labEquipment[i]);
+	}
+	cout << "--------------------------------------------------------------------------------" << endl;		
+}
+
 int printLab() //printing menu for the room 2: Laboratory
 {
 	int investigateChoice;
@@ -210,7 +232,7 @@ int printLab_Desk() //printing menu for the desk in Laboratory
 	int investigateChoice;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
 	cout << "-                                     DESK                                     -" << endl;
-	cout << "-     1. Picture                                                               -" << endl;
+	cout << "-     1. Picture Frame                                                         -" << endl;
 	cout << "-     2. Notebook                                                              -" << endl;
 	cout << "-     3. Return Back                                                           -" << endl;
 	cout << "-                                                                              -" << endl;
@@ -218,6 +240,21 @@ int printLab_Desk() //printing menu for the desk in Laboratory
 	cout << "-                                                                              -" << endl;
 	cout << "      Choose to investigate: ";
 	cin >> investigateChoice;
+	return investigateChoice;
+}
+
+int printLab_PictureFrame()
+{
+	int investigateChoice;
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+	cout << "-                      An old photograph of Smith family:                      -" << endl;
+	cout << "-                     Jack, Henry and their dad Richard...                     -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "-     1. Back of the frame                                                     -" << endl;
+	cout << "-     2. Return Back                                                           -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "      Choose to investigate: ";
+	cin >> 	investigateChoice;
 	return investigateChoice;
 }
 
@@ -280,18 +317,13 @@ int main() {
 				investigateChoice = printBasement_Desk();
 				if(investigateChoice == 1) //Computer
 				{
-					cout << "\n--------------------------------------------------------------------------------" << endl;
-					cout << "-     Enter the password:                                                      -" << endl;
-					cout << "-                                                                              -" << endl;
-					cout << "-     'Looks like i need to find the password to access camera records...'     -" << endl;
-					cout << "--------------------------------------------------------------------------------" << endl; 
+					printBasement_Computer();
 				}
 				else if(investigateChoice == 2) //Control Notebook
 				{
-					cout << "\n--------------------------------------------------------------------------------" << endl;
-					cout << 
+					printBasement_ControlNotebook(labEquipment);
 				}
-			}while(investigateChoice >= 0 && investigateChoice <= 3);
+			}while(investigateChoice >= 0 && investigateChoice < 3);
 		}
 	}while(investigateChoice >= 0 && investigateChoice <= 3);
 	
@@ -301,7 +333,15 @@ int main() {
 		{
 			do{
 				investigateChoice = printLab_Desk();
-			}while(investigateChoice >= 0 && investigateChoice <= 3);
+				if(investigateChoice == 1) //Picture Frame
+				{
+					investigateChoice = printLab_PictureFrame();
+				}
+				else if(investigateChoice == 2) //Notebook Of Compounds
+				{
+					
+				}
+			}while(investigateChoice >= 0 && investigateChoice < 3);
 		}
 	}while(investigateChoice >= 0 && investigateChoice <= 3);
 
