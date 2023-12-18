@@ -141,6 +141,22 @@ public:
     int getId() const {return id;}
 };
 
+void allignMessages(string text)
+{
+	int space, counter;
+	for(counter = 1; counter <= 5; counter++)
+	{
+		cout << " ";
+	}
+	cout << text;
+	space = 45 - text.length();
+	for(counter = 1; counter <= space; counter++)
+	{
+		cout << " ";
+	}
+}
+
+
 int printBasement() //printing menu for the room 1: Basement
 {
 	int investigateChoice;
@@ -149,6 +165,8 @@ int printBasement() //printing menu for the room 1: Basement
 	cout << "-     1. Desk                                                                  -" << endl;
 	cout << "-     2. Boxes                                                                 -" << endl;
 	cout << "-     3. Calendar                                                              -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "-     0. PERSONAL NOTES                                                        -" << endl;
 	cout << "-                                                                              -" << endl;
 	cout << "      Choose to investigate: ";
 	cin >> investigateChoice;
@@ -162,6 +180,9 @@ int printBasement_Desk() //printing menu for the desk in Basement
 	cout << "-                                     DESK                                     -" << endl;
 	cout << "-     1. Computer                                                              -" << endl;
 	cout << "-     2. Control Notebook                                                      -" << endl;
+	cout << "-     3. Return Back                                                           -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "-     0. PERSONAL NOTES                                                        -" << endl;
 	cout << "-                                                                              -" << endl;
 	cout << "      Choose to investigate: ";
 	cin >> investigateChoice;
@@ -177,6 +198,8 @@ int printLab() //printing menu for the room 2: Laboratory
 	cout << "-     2. Lab Equipments                                                        -" << endl;
 	cout << "-     3. Clock                                                                 -" << endl;
 	cout << "-                                                                              -" << endl;
+	cout << "-     0. PERSONAL NOTES                                                        -" << endl;
+	cout << "-                                                                              -" << endl;
 	cout << "      Choose to investigate: ";
 	cin >> investigateChoice;
 	return investigateChoice;	
@@ -189,6 +212,24 @@ int printLab_Desk() //printing menu for the desk in Laboratory
 	cout << "-                                     DESK                                     -" << endl;
 	cout << "-     1. Picture                                                               -" << endl;
 	cout << "-     2. Notebook                                                              -" << endl;
+	cout << "-     3. Return Back                                                           -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "-     0. PERSONAL NOTES                                                        -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "      Choose to investigate: ";
+	cin >> investigateChoice;
+	return investigateChoice;
+}
+
+int printGreenhouse() //printing menu for room 3 : Greenhouse
+{
+	int investigateChoice;
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+	cout << "-                                 GREENHOUSE                                   -" << endl;
+	cout << "-     1. Security Camera                                                       -" << endl;
+	cout << "-     2. Plants                                                                -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "-     0. PERSONAL NOTES                                                        -" << endl;
 	cout << "-                                                                              -" << endl;
 	cout << "      Choose to investigate: ";
 	cin >> investigateChoice;
@@ -205,7 +246,7 @@ int main() {
     	j++;
 	}
 
-	string labEquipment[10] = {"Glasses" , "Coats" , "Volumetric flask" , "Gloves" , "Test tube" , "Microscope" , "Funnel" , "Beaker" , "Magnet" , "Pipette"};
+	string labEquipment[10] = {"!!!Glasses" , "Coats" , "!Volumetric flask" , "Gloves" , "Test tube" , "Microscope" , "!!!!Funnel" , "!!Beaker" , "Magnet" , "Pipette"};
 	string compounds[5] = {"yellow + red" , "blue + yellow" , "blue + red" , "green + blue" , "green + red"};
 	
 	
@@ -230,17 +271,42 @@ int main() {
 	*/
 	
 	int investigateChoice;
-	investigateChoice = printBasement();
-	if(investigateChoice == 1)
-	{
-		investigateChoice = printBasement_Desk();
-	}
 	
+	do{
+		investigateChoice = printBasement();
+		if(investigateChoice == 1) //Desk
+		{
+			do{
+				investigateChoice = printBasement_Desk();
+				if(investigateChoice == 1) //Computer
+				{
+					cout << "\n--------------------------------------------------------------------------------" << endl;
+					cout << "-     Enter the password:                                                      -" << endl;
+					cout << "-                                                                              -" << endl;
+					cout << "-     'Looks like i need to find the password to access camera records...'     -" << endl;
+					cout << "--------------------------------------------------------------------------------" << endl; 
+				}
+				else if(investigateChoice == 2) //Control Notebook
+				{
+					cout << "\n--------------------------------------------------------------------------------" << endl;
+					cout << 
+				}
+			}while(investigateChoice >= 0 && investigateChoice <= 3);
+		}
+	}while(investigateChoice >= 0 && investigateChoice <= 3);
 	
-	investigateChoice = printLab();
-	if(investigateChoice == 1)
-	{
-		investigateChoice = printLab_Desk();
-	}
+	do{
+		investigateChoice = printLab();
+		if(investigateChoice == 1)
+		{
+			do{
+				investigateChoice = printLab_Desk();
+			}while(investigateChoice >= 0 && investigateChoice <= 3);
+		}
+	}while(investigateChoice >= 0 && investigateChoice <= 3);
+
+	do{
+		investigateChoice = printGreenhouse();
+	}while(investigateChoice >= 0 && investigateChoice <= 2);
 	
 }
