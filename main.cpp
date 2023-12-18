@@ -136,7 +136,7 @@ public:
     Note(string hint, int id)
     : hint(hint), id(id){}
 
-    string getString() const {return hint;}
+    string getHint() const {return hint;}
 
     int getId() const {return id;}
 };
