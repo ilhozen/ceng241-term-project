@@ -212,7 +212,7 @@ void printBasement_Computer() //printing message for the computer (does not have
 void printBasement_ControlNotebook(string labEquipment[10]) //primting control notebook's content
 {
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-                                 EQUIPMENTS                                   -" << endl;
+	cout << "-                                 EQUIPMENT                                   -" << endl;
 	for(int i=0; i < 10; i++)
 	{
 		allignMessages(labEquipment[i]);
@@ -226,7 +226,7 @@ int printLab() //printing menu for the room 2: Laboratory
 	cout << "\n--------------------------------------------------------------------------------" << endl;
 	cout << "-                                  LABORATORY                                  -" << endl;
 	cout << "-     1. Desk                                                                  -" << endl;
-	cout << "-     2. Lab Equipments                                                        -" << endl;
+	cout << "-     2. Lab Equipment                                                        -" << endl;
 	cout << "-     3. Clock                                                                 -" << endl;
 	cout << "-                                                                              -" << endl;
 	cout << "-     0. PERSONAL NOTES                                                        -" << endl;
@@ -294,10 +294,6 @@ int main() {
     personalNotes.push_back(note3);
     personalNotes.push_back(note4);
 
-    for(int i = 1; i<=5; i++){
-        cout << "Is Note " << i << " in the vector: " << checkNote(personalNotes, i) << endl;
-    }
-
     Box boxes[10];
     char j = 'A';
     for (int i = 0; i < 10; i++) //assigning symbols to boxes
@@ -332,7 +328,7 @@ int main() {
 	
 	int investigateChoice;
 	
-	/*do{
+	do{
 		investigateChoice = printBasement();
 		if(investigateChoice == 1) //Desk
 		{
@@ -371,6 +367,6 @@ int main() {
 	do{
 		investigateChoice = printGreenhouse();
 	}while(investigateChoice >= 0 && investigateChoice <= 2);
-*/
+
 return 0;
 }
