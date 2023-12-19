@@ -3,7 +3,7 @@
 #include <vector>
 
 using namespace std;
-const string COMPOUNDCOLOR = "TEMP_COLOR";
+const string COMPOUNDCOLOR = "Green";
 
 class Item //Class for the items we will use
 {
@@ -37,16 +37,6 @@ public:
         }
     }
 };
-
-void combine(ExperimentMaterial mat1, ExperimentMaterial mat2){
-    if(mat1.getName()== "TEMP_NAME" && mat2.getName()=="TEMP_NAME" || mat2.getName()== "TEMP_NAME" && mat1.getName()=="TEMP_NAME"){
-        cout << "You have combined " << mat1.getName() << "and " << mat2.getName() << ". It turned " << COMPOUNDCOLOR << endl;
-    }else{
-        cout << "This doesn't seem like the correct formula, I should check the notes to be sure.." << endl;
-        mat1.setUsed(0);
-        mat2.setUsed(0);
-    }
-}
 
 class Page: public Item
 {
@@ -141,15 +131,6 @@ public:
     int getId() const {return id;}
 };
 
-int checkNote(vector <Note> vec, int a){
-    for (Note p : vec) {
-        if (a == p.getId()){
-            return 1;
-        }
-    }
-    return 0;
-}
-
 void allignMessages(string text)
 {
 	int space, counter;
@@ -226,7 +207,7 @@ int printLab() //printing menu for the room 2: Laboratory
 	cout << "\n--------------------------------------------------------------------------------" << endl;
 	cout << "-                                  LABORATORY                                  -" << endl;
 	cout << "-     1. Desk                                                                  -" << endl;
-	cout << "-     2. Lab Equipment                                                        -" << endl;
+	cout << "-     2. Lab Equipment                                                         -" << endl;
 	cout << "-     3. Clock                                                                 -" << endl;
 	cout << "-                                                                              -" << endl;
 	cout << "-     0. PERSONAL NOTES                                                        -" << endl;
@@ -267,9 +248,67 @@ int printLab_PictureFrame()
 	return investigateChoice;
 }
 
-int printGreenhouse() //printing menu for room 3 : Greenhouse
+void printLab_PictureFrame_Back()
 {
-	int investigateChoice;
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+	cout << "-                           BACK OF THE FRAME                                  -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "-     4502                                                                     -" << endl;  //renkleri unutma
+	cout << "-     2356                                                                     -" << endl;
+	cout << "-     2107                                                                     -" << endl;
+	cout << "-     7119                                                                     -" << endl;
+	cout << "-     9864                                                                     -" << endl;
+	cout << "--------------------------------------------------------------------------------" << endl;
+}
+
+void printLab_CompoundNotebook()
+{
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+	cout << "-                         NOTEBOOK OF COMPOUNDS                                -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "-     1. Dinitrogen Monoxide +  Iodine Trichloride                             -" << endl;
+	cout << "-     2. Iodine Trichloride + Silicon Dioxide                                  -" << endl;
+	cout << "-     3. Dinitrogen Monoxide + Silicon Dioxide                                 -" << endl;
+	cout << "-     4. Carbon Monoxide + Silicon Dioxide                                     -" << endl;
+	cout << "-     5. Carbon Monoxide + Iodine Trichloride                                  -" << endl;
+	cout << "--------------------------------------------------------------------------------" << endl;
+}
+
+void printLab_Clock()
+{
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+	cout << "-     Looks like it has been working for a long time,                          -" << endl;
+	cout << "-     but it has stopped at 3 o'clock.                                         -" << endl;
+	cout << "--------------------------------------------------------------------------------" << endl;
+}
+
+void combine(int mat1, int mat2){
+    if(mat1 == 1 && mat2 == 3 || mat2 == 1 && mat1 == 3){
+        cout << "      You have combined Dinitrogen Monoxide and Silicon Dioxide.\n      It turned " << COMPOUNDCOLOR << endl;
+    }else{
+        cout << "      This doesn't seem like the correct formula,\n      I should check the notes to be sure.." << endl;
+    }
+}
+
+void printLab_UseExpMat()
+{
+	int m1, m2;
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+	cout << "-                           EXPERIMENT MATERIAL                                -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "-     1. Dinitrogen Monoxide                                                   -" << endl;
+	cout << "-     2. Iodine Trichloride                                                    -" << endl;
+	cout << "-     3. Silicon Dioxide                                                       -" << endl;
+	cout << "-     4. Carbon Monoxide                                                       -" << endl;
+	cout << "-                                                                              -" << endl;
+	cout << "      Choose to add to the beaker: ";
+	cin >> m1 >> m2;
+	combine(m1, m2);
+}
+			
+int printGreenhouse()
+{
+	int investigateChoice;		
 	cout << "\n--------------------------------------------------------------------------------" << endl;
 	cout << "-                                 GREENHOUSE                                   -" << endl;
 	cout << "-     1. Security Camera                                                       -" << endl;
@@ -282,17 +321,53 @@ int printGreenhouse() //printing menu for room 3 : Greenhouse
 	return investigateChoice;
 }
 
+int checkNote(vector <Note> vec, int a){
+    for (Note p : vec) {
+        if (a == p.getId()){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void PersonalNotes(vector <Note> vec)
+{
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+	cout << "-      LABORATORY                                                              -" << endl;
+	cout << "-                                                                              -" << endl;
+	if(checkNote(vec, 21) == 1)
+	{
+		cout << "-      1. The clock has stopped at 3 o'clock.                                  -" << endl; 
+	}
+	else
+	{
+		cout << "-      1. ?????????                                                            -" << endl;
+	}
+	if(checkNote(vec, 22) == 1)
+	{
+		cout << "-      2. There must be a connection between the broken clock and             -\n";
+		cout << "-      the compound written in the notebook.                                   -" << endl; 
+	}
+	else
+	{
+		cout << "-      2. ?????????                                                            -" << endl;
+	}
+	if(checkNote(vec, 23) == 1)
+	{
+		cout << "-      3. There are codes in different colors behind the picture.              -" << endl;	
+	}
+	else
+	{
+		cout << "-      3. ?????????                                                            -" << endl;
+	}
+}
+
 int main() {
 
-    vector<Note> personalNotes;
-    Note note1("Test Note 1", 1);
-    Note note2("Test Note 2", 2);
-    Note note3("Test Note 3", 3);
-    Note note4("Test Note 4", 4);
-    Note note5("Test Note 5", 5);
-    personalNotes.push_back(note1);
-    personalNotes.push_back(note3);
-    personalNotes.push_back(note4);
+    vector <Note> personalNotes;
+    Note noteLab1("The clock has stopped at 3 o'clock.", 21);
+    Note noteLab2("There must be a connection between the broken clock and the compound written in the notebook.", 22);
+    Note noteLab3("There are codes in different colors behind the picture", 23);
 
     Box boxes[10];
     char j = 'A';
@@ -303,10 +378,18 @@ int main() {
 	}
 
 	string labEquipment[10] = {"!!!Glasses" , "Coats" , "!Volumetric flask" , "Gloves" , "Test tube" , "Microscope" , "!!!!Funnel" , "!!Beaker" , "Magnet" , "Pipette"};
-	string compounds[5] = {"yellow + red" , "blue + yellow" , "blue + red" , "green + blue" , "green + red"};
+	string compounds[5] = {"1. yellow + red" , "2. blue + red" , "3. blue + yellow" , "4. brown + blue" , "5. brown + red"};
+	
+	ExperimentMaterial m1;
+	ExperimentMaterial m2;
+	ExperimentMaterial m3;
+	ExperimentMaterial m4;
+	m1.setName("Dinitrogen Monoxide"); //yellow
+	m2.setName("Iodine Trichloride"); //red
+	m3.setName("Silicon Dioxide"); //blue
+	m4.setName("Carbon Monoxide"); //brown 
 	
 	
-
 	Page controlNotebook;
 	Page notebookOfCompounds;
 	
@@ -327,6 +410,7 @@ int main() {
 	*/
 	
 	int investigateChoice;
+	int checkClock = 0, checkNotebook = 0;
 	
 	do{
 		investigateChoice = printBasement();
@@ -346,27 +430,61 @@ int main() {
 		}
 	}while(investigateChoice >= 0 && investigateChoice <= 3);
 	
+	//LABORATORY
+	
 	do{
 		investigateChoice = printLab();
-		if(investigateChoice == 1)
+		if(investigateChoice == 1) //Desk
 		{
 			do{
 				investigateChoice = printLab_Desk();
 				if(investigateChoice == 1) //Picture Frame
 				{
-					investigateChoice = printLab_PictureFrame();
+					do
+					{
+						investigateChoice = printLab_PictureFrame();
+						if(investigateChoice == 1) //Back of the picture frame
+						{
+							printLab_PictureFrame_Back();
+							personalNotes.push_back(noteLab3);
+						}	
+					}while(investigateChoice != 2);
 				}
 				else if(investigateChoice == 2) //Notebook Of Compounds
 				{
-					
+					printLab_CompoundNotebook();
+					checkNotebook = 1;
+					if(checkClock == 1)
+					{
+						personalNotes.push_back(noteLab2);
+					}
+				}
+				else if(investigateChoice == 0) //Personal Notes
+				{
+					PersonalNotes(personalNotes);
 				}
 			}while(investigateChoice >= 0 && investigateChoice < 3);
 		}
+		else if(investigateChoice == 2) //Lab Equipm
+		{
+			printLab_UseExpMat();
+		}
+		else if(investigateChoice == 3) //Clock
+		{
+			printLab_Clock();
+			personalNotes.push_back(noteLab1);
+			checkClock = 1;
+			if(checkNotebook == 1)
+			{
+				personalNotes.push_back(noteLab2);
+			}
+		}
+		else if(investigateChoice == 0) //Personal Notes
+		{
+			PersonalNotes(personalNotes);
+		}
 	}while(investigateChoice >= 0 && investigateChoice <= 3);
 
-	do{
-		investigateChoice = printGreenhouse();
-	}while(investigateChoice >= 0 && investigateChoice <= 2);
 
-return 0;
+	return 0;
 }
