@@ -190,15 +190,24 @@ void printBasement_Computer() //printing message for the computer (does not have
 	cout << "--------------------------------------------------------------------------------" << endl; 
 }
 
-void printBasement_ControlNotebook(string labEquipment[10]) //primting control notebook's content
+void printBasement_ControlNotebook(string labEquipment[10]) //printing control notebook's content
 {
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-                                 EQUIPMENT                                   -" << endl;
+	cout << "-                                 EQUIPMENT                                    -" << endl;
 	for(int i=0; i < 10; i++)
 	{
 		allignMessages(labEquipment[i]);
 	}
 	cout << "--------------------------------------------------------------------------------" << endl;		
+}
+
+void printBasement_Boxes(Box boxlist[10], string equipmentList[10]){
+    cout << "\n--------------------------------------------------------------------------------" << endl;
+    cout << "-                                  BOXES                                       -" << endl;
+        for(int i = 0; i<10;i++) {
+            allignMessages(string(1, boxlist[i].getSymbol()) + " => " + equipmentList[i]);
+        }
+    cout << "--------------------------------------------------------------------------------" << endl;
 }
 
 int printLab() //printing menu for the room 2: Laboratory
@@ -330,55 +339,115 @@ int checkNote(vector <Note> vec, int a){
     return 0;
 }
 
-void PersonalNotes(vector <Note> vec)
+void PersonalNotes(vector <Note> vec, vector <Note> filled)
 {
+    cout << "\n--------------------------------------------------------------------------------" << endl;
+    cout << "-                              PERSONAL NOTES                                  -" << endl;
+    cout << "-                                                                              -" << endl;
+    cout << "\n--------------------------------------------------------------------------------" << endl;
+    cout << "-     BASEMENT                                                                 -" << endl;
+    cout << "-                                                                              -" << endl;
+    if(checkNote(vec, 11) == 1)
+    {
+        allignMessages("1. " + filled[0].getHint());
+    }
+    else
+    {
+        cout << "-     1. ?????????                                                             -" << endl;
+    }
+    if(checkNote(vec, 12) == 1)
+    {
+        allignMessages("2. " + filled[1].getHint());
+    }
+    else
+    {
+        cout << "-     2. ?????????                                                             -" << endl;
+    }
+    if(checkNote(vec, 13) == 1)
+    {
+        allignMessages("3. " + filled[2].getHint());
+    }
+    else
+    {
+        cout << "-     3. ?????????                                                             -" << endl;
+    }
+    if(checkNote(vec, 14) == 1)
+    {
+        allignMessages("4. " + filled[3].getHint());
+    }
+    else
+    {
+        cout << "-     4. ?????????                                                             -" << endl;
+    }
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-      LABORATORY                                                              -" << endl;
+	cout << "-     LABORATORY                                                               -" << endl;
 	cout << "-                                                                              -" << endl;
 	if(checkNote(vec, 21) == 1)
 	{
-		cout << "-      1. The clock has stopped at 3 o'clock.                                  -" << endl; 
+		cout << "-     1. The clock has stopped at 3 o'clock.                                   -" << endl;
 	}
 	else
 	{
-		cout << "-      1. ?????????                                                            -" << endl;
+		cout << "-     1. ?????????                                                             -" << endl;
 	}
 	if(checkNote(vec, 22) == 1)
 	{
-		cout << "-      2. There must be a connection between the broken clock and             -\n";
-		cout << "-      the compound written in the notebook.                                   -" << endl; 
+		cout << "-     2. There must be a connection between the broken clock and              -\n";
+		cout << "-     the compound written in the notebook.                                    -" << endl;
 	}
 	else
 	{
-		cout << "-      2. ?????????                                                            -" << endl;
+		cout << "-     2. ?????????                                                             -" << endl;
 	}
 	if(checkNote(vec, 23) == 1)
 	{
-		cout << "-      3. There are codes in different colors behind the picture.              -" << endl;	
+		cout << "-     3. There are codes in different colors behind the picture.               -" << endl;
 	}
 	else
 	{
-		cout << "-      3. ?????????                                                            -" << endl;
+		cout << "-     3. ?????????                                                             -" << endl;
 	}
+}
+
+void addNote(vector <Note> vector, Note note){
+    //SONRA YAZCAZ UNUTURSAK UNUTTURMAYIN VEKTOR YENI KOPYA TUTUYOR MENUYE HER GIRDIGINDE.
 }
 
 int main() {
 
     vector <Note> personalNotes;
+    vector <Note> fullNotebook;
+    Note noteBase1("There is a date circled on the calendar: 1204", 11);
+    Note noteBase2("The control notebook has marks for specific laboratory equipment:     -\n"
+                   "-        !volumetric flask, !!beaker, !!!glasses, !!!!funnel                   ", 12);
+    Note noteBase3("There are letters on the boxes corresponding to                       -\n"
+                   "-        the marked laboratory equipment : S O Z A                             ", 13);
+    Note noteBase4("The computer has a password. I should find it.", 14);
     Note noteLab1("The clock has stopped at 3 o'clock.", 21);
     Note noteLab2("There must be a connection between the broken clock and the compound written in the notebook.", 22);
     Note noteLab3("There are codes in different colors behind the picture", 23);
-
-    Box boxes[10];
-    char j = 'A';
-    for (int i = 0; i < 10; i++) //assigning symbols to boxes
-    {
-    	boxes[i].setSymbol(j);
-    	j++;
-	}
+    fullNotebook.push_back(noteBase1);
+    fullNotebook.push_back(noteBase2);
+    fullNotebook.push_back(noteBase3);
+    fullNotebook.push_back(noteBase4);
+    fullNotebook.push_back(noteLab1);
+    fullNotebook.push_back(noteLab2);
+    fullNotebook.push_back(noteLab3);
 
 	string labEquipment[10] = {"!!!Glasses" , "Coats" , "!Volumetric flask" , "Gloves" , "Test tube" , "Microscope" , "!!!!Funnel" , "!!Beaker" , "Magnet" , "Pipette"};
 	string compounds[5] = {"1. yellow + red" , "2. blue + red" , "3. blue + yellow" , "4. brown + blue" , "5. brown + red"};
+
+    Box boxes[10];
+    boxes[0].setSymbol('Z');
+    boxes[1].setSymbol('C');
+    boxes[2].setSymbol('S');
+    boxes[3].setSymbol('R');
+    boxes[4].setSymbol('X');
+    boxes[5].setSymbol('G');
+    boxes[6].setSymbol('A');
+    boxes[7].setSymbol('O');
+    boxes[8].setSymbol('L');
+    boxes[9].setSymbol('P');
 	
 	ExperimentMaterial m1;
 	ExperimentMaterial m2;
@@ -421,15 +490,30 @@ int main() {
 				if(investigateChoice == 1) //Computer
 				{
 					printBasement_Computer();
+                    personalNotes.push_back(noteBase4);
 				}
 				else if(investigateChoice == 2) //Control Notebook
 				{
 					printBasement_ControlNotebook(labEquipment);
+                    personalNotes.push_back(noteBase2);
 				}
+                else if(investigateChoice == 0) //Personal Notes
+                {
+                    PersonalNotes(personalNotes, fullNotebook);
+                }
 			}while(investigateChoice >= 0 && investigateChoice < 3);
 		}
+        else if(investigateChoice == 2) //Boxes
+        {
+            printBasement_Boxes(boxes, labEquipment);
+            personalNotes.push_back(noteBase3);
+        }
+        else if(investigateChoice == 0) //Personal Notes
+        {
+            PersonalNotes(personalNotes, fullNotebook);
+        }
 	}while(investigateChoice >= 0 && investigateChoice <= 3);
-	
+
 	//LABORATORY
 	
 	do{
@@ -461,7 +545,7 @@ int main() {
 				}
 				else if(investigateChoice == 0) //Personal Notes
 				{
-					PersonalNotes(personalNotes);
+					PersonalNotes(personalNotes, fullNotebook);
 				}
 			}while(investigateChoice >= 0 && investigateChoice < 3);
 		}
@@ -481,7 +565,7 @@ int main() {
 		}
 		else if(investigateChoice == 0) //Personal Notes
 		{
-			PersonalNotes(personalNotes);
+			PersonalNotes(personalNotes, fullNotebook);
 		}
 	}while(investigateChoice >= 0 && investigateChoice <= 3);
 
