@@ -184,7 +184,7 @@ int printBasement_Desk() //printing menu for the desk in Basement
 void printBasement_Computer() //printing message for the computer (does not have the code)
 {
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-     Enter the password:                                                      -" << endl;
+	cout << "-     Enter the password: ___                                                  -" << endl;
 	cout << "-                                                                              -" << endl;
 	cout << "-     'Looks like i need to find the password to access camera records...'     -" << endl;
 	cout << "--------------------------------------------------------------------------------" << endl; 
@@ -345,7 +345,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
     cout << "-                              PERSONAL NOTES                                  -" << endl;
     cout << "-                                                                              -" << endl;
     cout << "\n--------------------------------------------------------------------------------" << endl;
-    cout << "-     BASEMENT                                                                 -" << endl;
+    cout << "-     BASEMENT NOTES                                                           -" << endl;
     cout << "-                                                                              -" << endl;
     if(checkNote(vec, 11) == 1)
     {
@@ -380,7 +380,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
         cout << "-     4. ?????????                                                             -" << endl;
     }
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-     LABORATORY                                                               -" << endl;
+	cout << "-     LABORATORY NOTES                                                         -" << endl;
 	cout << "-                                                                              -" << endl;
 	if(checkNote(vec, 21) == 1)
 	{
@@ -483,10 +483,12 @@ int main() {
 	
 	do{
 		investigateChoice = printBasement();
+        system("cls");
 		if(investigateChoice == 1) //Desk
 		{
 			do{
 				investigateChoice = printBasement_Desk();
+                system("cls");
 				if(investigateChoice == 1) //Computer
 				{
 					printBasement_Computer();
