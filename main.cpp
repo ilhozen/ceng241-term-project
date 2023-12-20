@@ -130,6 +130,23 @@ public:
     int getId() const {return id;}
 };
 
+
+void centeredMessage(string text)
+{
+	int space, counter;
+	space = 78 - text.length();
+	cout << "-";
+	for(counter=1; counter<= (space/2); counter++)
+	{
+		cout << " ";
+	}
+	cout << text;
+	for(counter=1; counter<= (space/2); counter++)
+	{
+		cout << " ";
+	}
+	cout << "-" << endl;
+}
 void allignMessages(string text)
 {
 	int space, counter;
@@ -171,7 +188,7 @@ int printBasement() //printing menu for the room 1: Basement
 {
 	int investigateChoice;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-                                   BASEMENT                                   -" << endl;
+	centeredMessage("BASEMENT");
 	cout << "-     1. Desk                                                                  -" << endl;
 	cout << "-     2. Boxes                                                                 -" << endl;
 	cout << "-     3. Calendar                                                              -" << endl;
@@ -187,7 +204,7 @@ int printBasement_Desk() //printing menu for the desk in Basement
 {
 	int investigateChoice;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-                                     DESK                                     -" << endl;
+	centeredMessage("DESK");
 	cout << "-     1. Computer                                                              -" << endl;
 	cout << "-     2. Control Notebook                                                      -" << endl;
 	cout << "-     3. Return Back                                                           -" << endl;
@@ -211,7 +228,7 @@ void printBasement_Computer() //printing message for the computer (does not have
 void printBasement_ControlNotebook(string labEquipment[10]) //printing control notebook's content
 {
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-                                 EQUIPMENT                                    -" << endl;
+	centeredMessage("EQUIPMENT");
 	for(int i=0; i < 10; i++)
 	{
 		allignMessages(labEquipment[i]);
@@ -221,7 +238,7 @@ void printBasement_ControlNotebook(string labEquipment[10]) //printing control n
 
 void printBasement_Boxes(Box boxlist[10], string equipmentList[10]){
     cout << "\n--------------------------------------------------------------------------------" << endl;
-    cout << "-                                  BOXES                                       -" << endl;
+    centeredMessage("BOXES");
         for(int i = 0; i<10;i++) {
             allignMessages(string(1, boxlist[i].getSymbol()) + " => " + equipmentList[i]);
         }
@@ -231,7 +248,7 @@ void printBasement_Boxes(Box boxlist[10], string equipmentList[10]){
 void printBasement_Calendar()
 {
     cout << "\n--------------------------------------------------------------------------------" << endl;
-    cout << "-                                  CALENDAR                                    -" << endl;
+    centeredMessage("CALENDAR");
     allignMessages("Date 12/04 is circled. Everything else seems normal.");
 }
 
@@ -239,7 +256,7 @@ int printLab() //printing menu for the room 2: Laboratory
 {
 	int investigateChoice;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-                                  LABORATORY                                  -" << endl;
+	centeredMessage("LABORATORY");
 	cout << "-     1. Desk                                                                  -" << endl;
 	cout << "-     2. Lab Equipment                                                         -" << endl;
 	cout << "-     3. Clock                                                                 -" << endl;
@@ -256,7 +273,7 @@ int printLab_Desk() //printing menu for the desk in Laboratory
 {
 	int investigateChoice;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-                                     DESK                                     -" << endl;
+	centeredMessage("DESK");
 	cout << "-     1. Picture Frame                                                         -" << endl;
 	cout << "-     2. Notebook                                                              -" << endl;
 	cout << "-     3. Return Back                                                           -" << endl;
@@ -286,7 +303,7 @@ int printLab_PictureFrame()
 void printLab_PictureFrame_Back()
 {
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-                           BACK OF THE FRAME                                  -" << endl;
+	centeredMessage("BACK OF THE FRAME");
 	cout << "-                                                                              -" << endl;
 	allignMessagesColor("4502", 12);
 	allignMessagesColor("2356", 14);
@@ -299,7 +316,7 @@ void printLab_PictureFrame_Back()
 void printLab_CompoundNotebook()
 {
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-                         NOTEBOOK OF COMPOUNDS                                -" << endl;
+	centeredMessage("NOTEBOOK OF COMPOUNDS")
 	cout << "-                                                                              -" << endl;
 	cout << "-     1. Dinitrogen Monoxide +  Iodine Trichloride                             -" << endl;
 	cout << "-     2. Iodine Trichloride + Silicon Dioxide                                  -" << endl;
@@ -358,7 +375,7 @@ void printLab_UseExpMat()
 {
 	int m1, m2;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-                           EXPERIMENT MATERIAL                                -" << endl;
+	centeredMessage("EXPERIMENT MATERIAL");
 	cout << "-                                                                              -" << endl;
 	cout << "-     1. Dinitrogen Monoxide                                                   -" << endl;
 	cout << "-     2. Iodine Trichloride                                                    -" << endl;
@@ -374,7 +391,7 @@ int printGreenhouse()
 {
 	int investigateChoice;		
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-                                 GREENHOUSE                                   -" << endl;
+	centeredMessage("GREENHOUSE");
 	cout << "-     1. Security Camera                                                       -" << endl;
 	cout << "-     2. Plants                                                                -" << endl;
 	cout << "-                                                                              -" << endl;
@@ -387,26 +404,23 @@ int printGreenhouse()
 
 void printGreenhouse_SecurityCam()
 {
-    allignMessages("Test Message Security Cam");
+    cout << "\n--------------------------------------------------------------------------------" << endl;
+    allignMessages("'It is still working.'");
+    allignMessages("'I must find the password as soon as possible to prove my innocence...'");
 }
 
 void printGreenhouse_Plants(Plants plants[5])
 {
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-    allignMessages("PLANTS");
-    /*for(int i=0; i < 5; i++)
+    centeredMessage("PLANTS");
+    for(int i=0; i < 5; i++)
     {
-    	cout << i << ". ";
-    	allignMessages(plants[i].getName());
-    	allignMessages("Color: ");
-		allignMessages(plants[i].getColor());
-    	allignMessages("Date: ");
-		allignMessages(plants[i].getDate());
-    	allignMessages("Number Of Leaves: ");
-		allignMessages(plants[i].getLeafNum());
+    	allignMessages("Name: " + plants[i].getName());
+    	allignMessages("Color: " + plants[i].getColor());
+    	allignMessages("Date: " + to_string(plants[i].getDate()));
+    	allignMessages("Number Of Leaves: " + to_string(plants[i].getLeafNum()));
 		cout << "\n";
 	}
-	*/
 }
 
 int checkNote(vector <Note> vec, int a){
@@ -421,7 +435,7 @@ int checkNote(vector <Note> vec, int a){
 void PersonalNotes(vector <Note> vec, vector <Note> filled)
 {
     cout << "\n--------------------------------------------------------------------------------" << endl;
-    cout << "-                              PERSONAL NOTES                                  -" << endl;
+    centeredMessage("PERSONAL NOTES");
     cout << "-                                                                              -" << endl;
     cout << "\n--------------------------------------------------------------------------------" << endl;
     cout << "-     BASEMENT NOTES                                                           -" << endl;
