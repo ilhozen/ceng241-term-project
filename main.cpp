@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <windows.h>
 
 using namespace std;
 const string COMPOUNDCOLOR = "Green";
@@ -71,12 +72,10 @@ class Plants: public Item
 		void setleafNum(int LeafNum){ leafNum = LeafNum; }
 		void setName(string Name){ name = Name; }
 		
-		void printInfo(){
-			cout << "Name : " << name << endl;
-			cout << "Planting Date : " << date << endl;
-			cout << "Color : " << color << endl;
-			cout << "Number of Leaves : " << leafNum << endl;
-		}
+		string getName() { return name;}
+		string getColor() { return color;}
+		int getLeafNum() { return leafNum;}
+		int getDate() { return date;}
 };
 
 class Lock{
@@ -148,7 +147,26 @@ void allignMessages(string text)
 	cout << "-" << endl;
 }
 
-
+void allignMessagesColor(string text, int k)
+{
+	HANDLE console;
+	console = GetStdHandle(STD_OUTPUT_HANDLE);
+	int space, counter;
+	cout << "-";
+	for(counter = 1; counter <= 5; counter++)
+	{
+		cout << " ";
+	}
+	SetConsoleTextAttribute(console, k);
+	cout << text;
+	SetConsoleTextAttribute(console, 7);
+	space = 73 - text.length();
+	for(counter = 1; counter <= space; counter++)
+	{
+		cout << " ";
+	}
+	cout << "-" << endl;
+}
 int printBasement() //printing menu for the room 1: Basement
 {
 	int investigateChoice;
@@ -225,6 +243,7 @@ int printLab() //printing menu for the room 2: Laboratory
 	cout << "-     1. Desk                                                                  -" << endl;
 	cout << "-     2. Lab Equipment                                                         -" << endl;
 	cout << "-     3. Clock                                                                 -" << endl;
+	cout << "-     4. Door                                                                  -" << endl;
 	cout << "-                                                                              -" << endl;
 	cout << "-     0. PERSONAL NOTES                                                        -" << endl;
 	cout << "-                                                                              -" << endl;
@@ -269,11 +288,11 @@ void printLab_PictureFrame_Back()
 	cout << "\n--------------------------------------------------------------------------------" << endl;
 	cout << "-                           BACK OF THE FRAME                                  -" << endl;
 	cout << "-                                                                              -" << endl;
-	cout << "-     4502                                                                     -" << endl;  //renkleri unutma
-	cout << "-     2356                                                                     -" << endl;
-	cout << "-     2107                                                                     -" << endl;
-	cout << "-     7119                                                                     -" << endl;
-	cout << "-     9864                                                                     -" << endl;
+	allignMessagesColor("4502", 12);
+	allignMessagesColor("2356", 14);
+	allignMessagesColor("2107", 10);
+	allignMessagesColor("7119", 13);
+	allignMessagesColor("9864", 11);
 	cout << "--------------------------------------------------------------------------------" << endl;
 }
 
@@ -296,6 +315,35 @@ void printLab_Clock()
 	cout << "-     Looks like it has been working for a long time,                          -" << endl;
 	cout << "-     but it has stopped at 3 o'clock.                                         -" << endl;
 	cout << "--------------------------------------------------------------------------------" << endl;
+}
+
+void printLabtoGreenhouse()
+{
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+	allignMessages("You are about to enter Greenhouse");
+	allignMessages("You check back of the door and you saw a letter written on it: ");
+	allignMessages("C");
+	cout << "Press Enter: "; //BAK BURAYA
+}
+
+int printLab_Door()
+{
+	int password;
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+	cout << "      Enter the password to enter Greenhouse: ";
+	cin >> password;
+	cout << "--------------------------------------------------------------------------------" << endl;
+	if(password == 2107)
+	{
+		printLabtoGreenhouse();
+		return 1;
+	}
+	else
+	{
+		allignMessages("The password is incorrect.");
+		cout << "--------------------------------------------------------------------------------" << endl;
+		return 0;
+	}
 }
 
 void combine(int mat1, int mat2){
@@ -342,9 +390,23 @@ void printGreenhouse_SecurityCam()
     allignMessages("Test Message Security Cam");
 }
 
-void printGreenhouse_Plants()
+void printGreenhouse_Plants(Plants plants[5])
 {
-    allignMessages("Test Message Plants");
+	cout << "\n--------------------------------------------------------------------------------" << endl;
+    allignMessages("PLANTS");
+    /*for(int i=0; i < 5; i++)
+    {
+    	cout << i << ". ";
+    	allignMessages(plants[i].getName());
+    	allignMessages("Color: ");
+		allignMessages(plants[i].getColor());
+    	allignMessages("Date: ");
+		allignMessages(plants[i].getDate());
+    	allignMessages("Number Of Leaves: ");
+		allignMessages(plants[i].getLeafNum());
+		cout << "\n";
+	}
+	*/
 }
 
 int checkNote(vector <Note> vec, int a){
@@ -401,7 +463,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
 	cout << "-                                                                              -" << endl;
 	if(checkNote(vec, 21) == 1)
 	{
-		cout << "-     1. The clock has stopped at 3 o'clock.                                   -" << endl;
+		allignMessages("1. " + filled[4].getHint());
 	}
 	else
 	{
@@ -409,8 +471,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
 	}
 	if(checkNote(vec, 22) == 1)
 	{
-		cout << "-     2. There must be a connection between the broken clock and              -\n";
-		cout << "-     the compound written in the notebook.                                    -" << endl;
+		allignMessages("2. " + filled[5].getHint());
 	}
 	else
 	{
@@ -418,7 +479,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
 	}
 	if(checkNote(vec, 23) == 1)
 	{
-		cout << "-     3. There are codes in different colors behind the picture.               -" << endl;
+		allignMessages("3. " + filled[6].getHint());
 	}
 	else
 	{
@@ -462,7 +523,8 @@ int main() {
                    "-        the marked laboratory equipment : S O Z A                             ", 13);
     Note noteBase4("The computer has a password. I should find it.", 14);
     Note noteLab1("The clock has stopped at 3 o'clock.", 21);
-    Note noteLab2("There must be a connection between the broken clock and the compound written in the notebook.", 22);
+    Note noteLab2("There must be a connection between the broken clock and               -\n"
+				  "-        the compound written in the notebook.                                 ", 22);
     Note noteLab3("There are codes in different colors behind the picture", 23);
     Note noteGreen1("I haven't used the date marked on the calendar in the basement.", 31);
     Note noteGreen2("There were 5 leaves on the plant that changed color.", 32);
@@ -500,7 +562,6 @@ int main() {
 	m3.setName("Silicon Dioxide"); //blue
 	m4.setName("Carbon Monoxide"); //brown 
 	
-	
 	Page controlNotebook;
 	Page notebookOfCompounds;
 	
@@ -512,6 +573,32 @@ int main() {
 		notebookOfCompounds.setText(compounds[i]);
 	}
 	
+	Plants plants[5];
+	plants[0].setName("Jasmine");
+	plants[0].setColor("yellow");
+	plants[0].setDate(3012);
+	plants[0].setleafNum(8);
+	
+	plants[1].setName("Tulip");
+	plants[1].setColor("green");
+	plants[1].setDate(1204);
+	plants[1].setleafNum(5);
+	
+	plants[2].setName("Lotus");
+	plants[2].setColor("red");
+	plants[2].setDate(0101);
+	plants[2].setleafNum(6);
+	
+	plants[3].setName("Sunflower");
+	plants[3].setColor("purple");
+	plants[3].setDate(2903);
+	plants[3].setleafNum(20);
+	
+	plants[4].setName("Orchid");
+	plants[4].setColor("blue");
+	plants[4].setDate(1810);
+	plants[4].setleafNum(10);
+	
 	/*   hikaye için yazım fikri
 
 	cout << "--------------------------------------------------------------------------------" << endl;
@@ -521,9 +608,10 @@ int main() {
 	*/
 	
 	int investigateChoice;
-	int checkClock = 0, checkNotebook = 0;
+	int checkClock = 0, checkNotebook = 0, doorLab;
 
     //BASEMENT
+    
 	do{
 		investigateChoice = printBasement();
         system("cls");
@@ -537,9 +625,9 @@ int main() {
 					printBasement_Computer();
                     addNote(personalNotes, noteBase4);
                     //personalNotes.push_back(noteBase4);
-                    /*for(Note p: personalNotes){
+                    for(Note p: personalNotes){
                         cout << p.getHint()<<endl;
-                    }*/ //Here for testing of the addnote function
+                    } //Here for testing of the addnote function
 				}
 				else if(investigateChoice == 2) //Control Notebook
 				{
@@ -584,7 +672,7 @@ int main() {
 						if(investigateChoice == 1) //Back of the picture frame
 						{
 							printLab_PictureFrame_Back();
-							personalNotes.push_back(noteLab3);
+							addNote(personalNotes, noteLab3);
 						}	
 					}while(investigateChoice != 2);
 				}
@@ -594,7 +682,7 @@ int main() {
 					checkNotebook = 1;
 					if(checkClock == 1)
 					{
-						personalNotes.push_back(noteLab2);
+						addNote(personalNotes, noteLab2);
 					}
 				}
 				else if(investigateChoice == 0) //Personal Notes
@@ -610,18 +698,26 @@ int main() {
 		else if(investigateChoice == 3) //Clock
 		{
 			printLab_Clock();
-			personalNotes.push_back(noteLab1);
+			addNote(personalNotes, noteLab1);
 			checkClock = 1;
 			if(checkNotebook == 1)
 			{
-				personalNotes.push_back(noteLab2);
+				addNote(personalNotes, noteLab2);
+			}
+		}
+		else if(investigateChoice == 4)
+		{
+			doorLab = printLab_Door();
+			if(doorLab == 1)
+			{
+				investigateChoice = 5;
 			}
 		}
 		else if(investigateChoice == 0) //Personal Notes
 		{
 			PersonalNotes(personalNotes, fullNotebook);
 		}
-	}while(investigateChoice >= 0 && investigateChoice <= 3);
+	}while(investigateChoice >= 0 && investigateChoice <= 4);
 
     //GREENHOUSE
     system("cls");
@@ -635,7 +731,7 @@ int main() {
         }
         else if(investigateChoice == 2) //Plants
         {
-            printGreenhouse_Plants();
+            printGreenhouse_Plants(plants);
             addNote(personalNotes, noteGreen2);
         }
         else if(investigateChoice == 0) //Personal Notes
