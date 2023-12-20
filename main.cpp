@@ -166,8 +166,8 @@ void alignMessages(string text)
 
 void alignMessagesColor(string text, int k)
 {
-	HANDLE console;
-	console = GetStdHandle(STD_OUTPUT_HANDLE);
+    HANDLE console;
+    console = GetStdHandle(STD_OUTPUT_HANDLE);
 	int space, counter;
 	cout << "-";
 	for(counter = 1; counter <= 5; counter++)
@@ -189,12 +189,13 @@ int printBasement() //printing menu for the room 1: Basement
 	int investigateChoice;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
 	centeredMessage("BASEMENT");
-	cout << "-     1. Desk                                                                  -" << endl;
-	cout << "-     2. Boxes                                                                 -" << endl;
-	cout << "-     3. Calendar                                                              -" << endl;
-	cout << "-                                                                              -" << endl;
-	cout << "-     0. PERSONAL NOTES                                                        -" << endl;
-	cout << "-                                                                              -" << endl;
+    cout << "-     1. Desk                                                                  -" << endl;
+    cout << "-     2. Boxes                                                                 -" << endl;
+    cout << "-     3. Calendar                                                              -" << endl;
+    cout << "-     4. Door                                                                  -" << endl;
+    cout << "-                                                                              -" << endl;
+    cout << "-     0. PERSONAL NOTES                                                        -" << endl;
+    cout << "-                                                                              -" << endl;
 	cout << "      Choose to investigate: ";
 	cin >> investigateChoice;
 	return investigateChoice;
@@ -250,6 +251,37 @@ void printBasement_Calendar()
     cout << "\n--------------------------------------------------------------------------------" << endl;
     centeredMessage("CALENDAR");
     alignMessages("Date 12/04 is circled. Everything else seems normal.");
+}
+
+void printBasementtoLab()
+{
+    char cont;
+    cout << "\n--------------------------------------------------------------------------------" << endl;
+    alignMessages("You are about to enter the Lab");
+    alignMessages("You check the back of the door and you see a number written on it: ");
+    alignMessages("1");
+    cout << "Press '*' to Continue: ";
+    cin >> cont;
+}
+
+int printBasement_Door()
+{
+    string password;
+    cout << "\n--------------------------------------------------------------------------------" << endl;
+    cout << "      Enter the password to enter the Lab: ";
+    cin >> password;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    if(password == "SOZA")
+    {
+        printBasementtoLab();
+        return 1;
+    }
+    else
+    {
+        alignMessages("The password is incorrect.");
+        cout << "--------------------------------------------------------------------------------" << endl;
+        return 0;
+    }
 }
 
 int printLab() //printing menu for the room 2: Laboratory
@@ -336,11 +368,13 @@ void printLab_Clock()
 
 void printLabtoGreenhouse()
 {
+    char cont;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
 	alignMessages("You are about to enter Greenhouse");
-	alignMessages("You check back of the door and you saw a letter written on it: ");
+	alignMessages("You check the back of the door and you saw a letter written on it: ");
 	alignMessages("C");
-	cout << "Press Enter: "; //BAK BURAYA
+	cout << "Type '*' to Continue: "; //BAK BURAYA
+    cin >> cont;
 }
 
 int printLab_Door()
@@ -409,8 +443,9 @@ void printGreenhouse_SecurityCam()
     alignMessages("'I must find the password as soon as possible to prove my innocence...'");
 }
 
-void printGreenhouse_Plants(Plants plants[5])
+void printGreenhouse_Plants(Plants plants[5], int check)
 {
+    int plantChoice;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
     centeredMessage("PLANTS");
     for(int i=0; i < 5; i++)
@@ -421,6 +456,29 @@ void printGreenhouse_Plants(Plants plants[5])
     	alignMessages("Number Of Leaves: " + to_string(plants[i].getLeafNum()));
 		cout << "\n";
 	}
+    if (check == 1){
+        cout << "--------------------------------------------------------------------------------" << endl;
+        alignMessages("1. Jasmine");
+        alignMessages("2. Tulip");
+        alignMessages("3. Sunflower");
+        alignMessages("4. Lotus");
+        alignMessages("5. Orchid");
+        cout << "-                                                                              -" << endl;
+        cout << "      Choose the plant you want to pour the compound on: ";
+        cin >> plantChoice;
+        if (plantChoice == 2){
+            cout << "\n      You poured the compound on the plant." << endl;
+            cout << "      The plant turned turquoise." << endl;
+            cout << "\n      The plant's 5 leaves finally remind you of the final digit of the " <<endl;
+            cout << "      computer password." <<endl;
+        }
+        else
+        {
+            alignMessages("\n");
+            alignMessages("Nothing happened.");
+            alignMessages("'I should look at my notes and think carefully about this.'");
+        }
+    }
 }
 
 int checkNote(vector <Note> vec, int a){
@@ -541,7 +599,8 @@ int main() {
 				  "-        the compound written in the notebook.                                 ", 22);
     Note noteLab3("There are codes in different colors behind the picture", 23);
     Note noteGreen1("I haven't used the date marked on the calendar in the basement.", 31);
-    Note noteGreen2("There were 5 leaves on the plant that changed color.", 32);
+    Note noteGreen2("I need to use the compound I made on one of the plants.               -\n"
+                    "-        Which one should I choose?                                            ", 32);
     fullNotebook.push_back(noteBase1);
     fullNotebook.push_back(noteBase2);
     fullNotebook.push_back(noteBase3);
@@ -622,13 +681,14 @@ int main() {
 	*/
 	
 	int investigateChoice;
-	int checkClock = 0, checkNotebook = 0, doorLab;
+	int checkClock = 0, checkNotebook = 0, checkPlant = 0, door;
 
     //BASEMENT
     
 	do{
 		investigateChoice = printBasement();
-        system("cls");
+        if(investigateChoice != 4)
+            system("cls");
 		if(investigateChoice == 1) //Desk
 		{
 			do{
@@ -664,11 +724,19 @@ int main() {
             printBasement_Calendar();
             addNote(personalNotes, noteBase1);
         }
+        else if(investigateChoice == 4)
+        {
+            door = printBasement_Door();
+            if(door == 1)
+            {
+                investigateChoice = 5;
+            }
+        }
         else if(investigateChoice == 0) //Personal Notes
         {
             PersonalNotes(personalNotes, fullNotebook);
         }
-	}while(investigateChoice >= 0 && investigateChoice <= 3);
+	}while(investigateChoice >= 0 && investigateChoice <= 4);
 
 	//LABORATORY
 	
@@ -721,8 +789,8 @@ int main() {
 		}
 		else if(investigateChoice == 4)
 		{
-			doorLab = printLab_Door();
-			if(doorLab == 1)
+			door = printLab_Door();
+			if(door == 1)
 			{
 				investigateChoice = 5;
 			}
@@ -737,16 +805,17 @@ int main() {
     system("cls");
     do{
         investigateChoice = printGreenhouse();
+        addNote(personalNotes, noteGreen1);
         system("cls");
         if(investigateChoice == 1) //Security Camera
         {
             printGreenhouse_SecurityCam();
-            addNote(personalNotes, noteGreen1);
         }
         else if(investigateChoice == 2) //Plants
         {
-            printGreenhouse_Plants(plants);
+            printGreenhouse_Plants(plants, checkPlant);
             addNote(personalNotes, noteGreen2);
+            checkPlant = 1;
         }
         else if(investigateChoice == 0) //Personal Notes
         {
