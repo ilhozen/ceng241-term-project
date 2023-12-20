@@ -210,6 +210,13 @@ void printBasement_Boxes(Box boxlist[10], string equipmentList[10]){
     cout << "--------------------------------------------------------------------------------" << endl;
 }
 
+void printBasement_Calendar()
+{
+    cout << "\n--------------------------------------------------------------------------------" << endl;
+    cout << "-                                  CALENDAR                                    -" << endl;
+    allignMessages("Date 12/04 is circled. Everything else seems normal.");
+}
+
 int printLab() //printing menu for the room 2: Laboratory
 {
 	int investigateChoice;
@@ -330,6 +337,16 @@ int printGreenhouse()
 	return investigateChoice;
 }
 
+void printGreenhouse_SecurityCam()
+{
+    allignMessages("Test Message Security Cam");
+}
+
+void printGreenhouse_Plants()
+{
+    allignMessages("Test Message Plants");
+}
+
 int checkNote(vector <Note> vec, int a){
     for (Note p : vec) {
         if (a == p.getId()){
@@ -407,10 +424,31 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
 	{
 		cout << "-     3. ?????????                                                             -" << endl;
 	}
+    cout << "\n--------------------------------------------------------------------------------" << endl;
+    cout << "-     GREENHOUSE NOTES                                                         -" << endl;
+    cout << "-                                                                              -" << endl;
+    if(checkNote(vec, 31) == 1)
+    {
+        allignMessages("1. " + filled[7].getHint());
+    }
+    else
+    {
+        cout << "-     1. ?????????                                                             -" << endl;
+    }
+    if(checkNote(vec, 32) == 1)
+    {
+        allignMessages("2. " + filled[8].getHint());
+    }
+    else
+    {
+        cout << "-     2. ?????????                                                             -" << endl;
+    }
 }
 
-void addNote(vector <Note> vector, Note note){
-    //SONRA YAZCAZ UNUTURSAK UNUTTURMAYIN VEKTOR YENI KOPYA TUTUYOR MENUYE HER GIRDIGINDE.
+void addNote(vector <Note> &vector, Note note){
+    if(!checkNote(vector, note.getId())){
+        vector.push_back(note);
+    }
 }
 
 int main() {
@@ -426,6 +464,8 @@ int main() {
     Note noteLab1("The clock has stopped at 3 o'clock.", 21);
     Note noteLab2("There must be a connection between the broken clock and the compound written in the notebook.", 22);
     Note noteLab3("There are codes in different colors behind the picture", 23);
+    Note noteGreen1("I haven't used the date marked on the calendar in the basement.", 31);
+    Note noteGreen2("There were 5 leaves on the plant that changed color.", 32);
     fullNotebook.push_back(noteBase1);
     fullNotebook.push_back(noteBase2);
     fullNotebook.push_back(noteBase3);
@@ -433,6 +473,8 @@ int main() {
     fullNotebook.push_back(noteLab1);
     fullNotebook.push_back(noteLab2);
     fullNotebook.push_back(noteLab3);
+    fullNotebook.push_back(noteGreen1);
+    fullNotebook.push_back(noteGreen2);
 
 	string labEquipment[10] = {"!!!Glasses" , "Coats" , "!Volumetric flask" , "Gloves" , "Test tube" , "Microscope" , "!!!!Funnel" , "!!Beaker" , "Magnet" , "Pipette"};
 	string compounds[5] = {"1. yellow + red" , "2. blue + red" , "3. blue + yellow" , "4. brown + blue" , "5. brown + red"};
@@ -480,7 +522,8 @@ int main() {
 	
 	int investigateChoice;
 	int checkClock = 0, checkNotebook = 0;
-	
+
+    //BASEMENT
 	do{
 		investigateChoice = printBasement();
         system("cls");
@@ -492,12 +535,16 @@ int main() {
 				if(investigateChoice == 1) //Computer
 				{
 					printBasement_Computer();
-                    personalNotes.push_back(noteBase4);
+                    addNote(personalNotes, noteBase4);
+                    //personalNotes.push_back(noteBase4);
+                    /*for(Note p: personalNotes){
+                        cout << p.getHint()<<endl;
+                    }*/ //Here for testing of the addnote function
 				}
 				else if(investigateChoice == 2) //Control Notebook
 				{
 					printBasement_ControlNotebook(labEquipment);
-                    personalNotes.push_back(noteBase2);
+                    addNote(personalNotes, noteBase2);
 				}
                 else if(investigateChoice == 0) //Personal Notes
                 {
@@ -508,7 +555,12 @@ int main() {
         else if(investigateChoice == 2) //Boxes
         {
             printBasement_Boxes(boxes, labEquipment);
-            personalNotes.push_back(noteBase3);
+            addNote(personalNotes, noteBase3);
+        }
+        else if(investigateChoice == 3) //Boxes
+        {
+            printBasement_Calendar();
+            addNote(personalNotes, noteBase1);
         }
         else if(investigateChoice == 0) //Personal Notes
         {
@@ -571,6 +623,26 @@ int main() {
 		}
 	}while(investigateChoice >= 0 && investigateChoice <= 3);
 
+    //GREENHOUSE
+    system("cls");
+    do{
+        investigateChoice = printGreenhouse();
+        system("cls");
+        if(investigateChoice == 1) //Security Camera
+        {
+            printGreenhouse_SecurityCam();
+            addNote(personalNotes, noteGreen1);
+        }
+        else if(investigateChoice == 2) //Plants
+        {
+            printGreenhouse_Plants();
+            addNote(personalNotes, noteGreen2);
+        }
+        else if(investigateChoice == 0) //Personal Notes
+        {
+            PersonalNotes(personalNotes, fullNotebook);
+        }
+    }while(investigateChoice >= 0 && investigateChoice <= 2);
 
 	return 0;
 }
