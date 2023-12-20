@@ -84,7 +84,7 @@ class Lock{
 		bool opened;
 	public:
 		void setcode(int code){this->code=code;}
-		int getcode() { return code;} 
+		int getcode() { return code;}
 		void isOpened(int A){
         	if (A == 1){
             	opened = true;
@@ -147,7 +147,7 @@ void centeredMessage(string text)
 	}
 	cout << "-" << endl;
 }
-void allignMessages(string text)
+void alignMessages(string text)
 {
 	int space, counter;
 	cout << "-";
@@ -164,7 +164,7 @@ void allignMessages(string text)
 	cout << "-" << endl;
 }
 
-void allignMessagesColor(string text, int k)
+void alignMessagesColor(string text, int k)
 {
 	HANDLE console;
 	console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -231,7 +231,7 @@ void printBasement_ControlNotebook(string labEquipment[10]) //printing control n
 	centeredMessage("EQUIPMENT");
 	for(int i=0; i < 10; i++)
 	{
-		allignMessages(labEquipment[i]);
+		alignMessages(labEquipment[i]);
 	}
 	cout << "--------------------------------------------------------------------------------" << endl;		
 }
@@ -240,7 +240,7 @@ void printBasement_Boxes(Box boxlist[10], string equipmentList[10]){
     cout << "\n--------------------------------------------------------------------------------" << endl;
     centeredMessage("BOXES");
         for(int i = 0; i<10;i++) {
-            allignMessages(string(1, boxlist[i].getSymbol()) + " => " + equipmentList[i]);
+            alignMessages(string(1, boxlist[i].getSymbol()) + " => " + equipmentList[i]);
         }
     cout << "--------------------------------------------------------------------------------" << endl;
 }
@@ -249,7 +249,7 @@ void printBasement_Calendar()
 {
     cout << "\n--------------------------------------------------------------------------------" << endl;
     centeredMessage("CALENDAR");
-    allignMessages("Date 12/04 is circled. Everything else seems normal.");
+    alignMessages("Date 12/04 is circled. Everything else seems normal.");
 }
 
 int printLab() //printing menu for the room 2: Laboratory
@@ -303,20 +303,20 @@ int printLab_PictureFrame()
 void printLab_PictureFrame_Back()
 {
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	centeredMessage("BACK OF THE FRAME");
+	centeredMessage("BACK OF THE FRAME ");
 	cout << "-                                                                              -" << endl;
-	allignMessagesColor("4502", 12);
-	allignMessagesColor("2356", 14);
-	allignMessagesColor("2107", 10);
-	allignMessagesColor("7119", 13);
-	allignMessagesColor("9864", 11);
+	alignMessagesColor("4502", 12);
+	alignMessagesColor("2356", 14);
+	alignMessagesColor("2107", 10);
+	alignMessagesColor("7119", 13);
+	alignMessagesColor("9864", 11);
 	cout << "--------------------------------------------------------------------------------" << endl;
 }
 
 void printLab_CompoundNotebook()
 {
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	centeredMessage("NOTEBOOK OF COMPOUNDS")
+	centeredMessage("NOTEBOOK OF COMPOUNDS");
 	cout << "-                                                                              -" << endl;
 	cout << "-     1. Dinitrogen Monoxide +  Iodine Trichloride                             -" << endl;
 	cout << "-     2. Iodine Trichloride + Silicon Dioxide                                  -" << endl;
@@ -337,9 +337,9 @@ void printLab_Clock()
 void printLabtoGreenhouse()
 {
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	allignMessages("You are about to enter Greenhouse");
-	allignMessages("You check back of the door and you saw a letter written on it: ");
-	allignMessages("C");
+	alignMessages("You are about to enter Greenhouse");
+	alignMessages("You check back of the door and you saw a letter written on it: ");
+	alignMessages("C");
 	cout << "Press Enter: "; //BAK BURAYA
 }
 
@@ -357,7 +357,7 @@ int printLab_Door()
 	}
 	else
 	{
-		allignMessages("The password is incorrect.");
+		alignMessages("The password is incorrect.");
 		cout << "--------------------------------------------------------------------------------" << endl;
 		return 0;
 	}
@@ -405,8 +405,8 @@ int printGreenhouse()
 void printGreenhouse_SecurityCam()
 {
     cout << "\n--------------------------------------------------------------------------------" << endl;
-    allignMessages("'It is still working.'");
-    allignMessages("'I must find the password as soon as possible to prove my innocence...'");
+    alignMessages("'It is still working.'");
+    alignMessages("'I must find the password as soon as possible to prove my innocence...'");
 }
 
 void printGreenhouse_Plants(Plants plants[5])
@@ -415,10 +415,10 @@ void printGreenhouse_Plants(Plants plants[5])
     centeredMessage("PLANTS");
     for(int i=0; i < 5; i++)
     {
-    	allignMessages("Name: " + plants[i].getName());
-    	allignMessages("Color: " + plants[i].getColor());
-    	allignMessages("Date: " + to_string(plants[i].getDate()));
-    	allignMessages("Number Of Leaves: " + to_string(plants[i].getLeafNum()));
+    	alignMessages("Name: " + plants[i].getName());
+    	alignMessages("Color: " + plants[i].getColor());
+    	alignMessages("Date: " + to_string(plants[i].getDate()));
+    	alignMessages("Number Of Leaves: " + to_string(plants[i].getLeafNum()));
 		cout << "\n";
 	}
 }
@@ -442,7 +442,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
     cout << "-                                                                              -" << endl;
     if(checkNote(vec, 11) == 1)
     {
-        allignMessages("1. " + filled[0].getHint());
+        alignMessages("1. " + filled[0].getHint());
     }
     else
     {
@@ -450,7 +450,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
     }
     if(checkNote(vec, 12) == 1)
     {
-        allignMessages("2. " + filled[1].getHint());
+        alignMessages("2. " + filled[1].getHint());
     }
     else
     {
@@ -458,7 +458,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
     }
     if(checkNote(vec, 13) == 1)
     {
-        allignMessages("3. " + filled[2].getHint());
+        alignMessages("3. " + filled[2].getHint());
     }
     else
     {
@@ -466,7 +466,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
     }
     if(checkNote(vec, 14) == 1)
     {
-        allignMessages("4. " + filled[3].getHint());
+        alignMessages("4. " + filled[3].getHint());
     }
     else
     {
@@ -477,7 +477,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
 	cout << "-                                                                              -" << endl;
 	if(checkNote(vec, 21) == 1)
 	{
-		allignMessages("1. " + filled[4].getHint());
+		alignMessages("1. " + filled[4].getHint());
 	}
 	else
 	{
@@ -485,7 +485,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
 	}
 	if(checkNote(vec, 22) == 1)
 	{
-		allignMessages("2. " + filled[5].getHint());
+		alignMessages("2. " + filled[5].getHint());
 	}
 	else
 	{
@@ -493,7 +493,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
 	}
 	if(checkNote(vec, 23) == 1)
 	{
-		allignMessages("3. " + filled[6].getHint());
+		alignMessages("3. " + filled[6].getHint());
 	}
 	else
 	{
@@ -504,7 +504,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
     cout << "-                                                                              -" << endl;
     if(checkNote(vec, 31) == 1)
     {
-        allignMessages("1. " + filled[7].getHint());
+        alignMessages("1. " + filled[7].getHint());
     }
     else
     {
@@ -512,7 +512,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
     }
     if(checkNote(vec, 32) == 1)
     {
-        allignMessages("2. " + filled[8].getHint());
+        alignMessages("2. " + filled[8].getHint());
     }
     else
     {
@@ -600,7 +600,7 @@ int main() {
 	
 	plants[2].setName("Lotus");
 	plants[2].setColor("red");
-	plants[2].setDate(0101);
+	plants[2].setDate(1010);
 	plants[2].setleafNum(6);
 	
 	plants[3].setName("Sunflower");
