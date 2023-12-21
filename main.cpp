@@ -135,33 +135,33 @@ class Plants: public Item
 class Lock{
 protected:
     string code;
-    int open;
-
+    bool open;
 public:
     Lock(string code)
     : code(code) {open = 0;}
     string getCode(){return code;}
-    int isOpen(){return open;}
-    virtual int checkCode(string givenCode, int &basementDoor, int &labDoor) = 0;
+    bool isOpen(){return open;}
+    void setOpen(bool a) { open = a; }
+    virtual void checkCode(string givenCode, bool *basementDoor, bool *labDoor) = 0;
 };
 
 class DoorLock : public Lock{
 public:
     DoorLock(string code)
     : Lock(code) {}
-    int checkCode(string givenCode, int &basementDoor, int &labDoor){
-        if(basementDoor == 0 && givenCode == getCode()){
-            basementDoor = 1;
+    void checkCode(string givenCode, bool *basementDoor, bool *labDoor){
+        if(*basementDoor == false && givenCode == getCode()){
+            *basementDoor = true;
             //PRINT MESSAGE TO GO SLAY THE LAB
         }
-        else if(basementDoor == 0 && givenCode != getCode()){
+        else if(*basementDoor == false && givenCode != getCode()){
             //DO NOT ZORBALAMAK THE KAPI
         }
-        else if (labDoor == 0 && givenCode == getCode()){
-            labDoor = 1;
+        else if (*labDoor == false && givenCode == getCode()){
+            *labDoor = true;
             //PRINT MESSAGE TO GO SLAY THE GREENHOUSE
         }
-        else if(labDoor == 0 && givenCode != getCode()){
+        else if(*labDoor == false && givenCode != getCode()){
             //DO NOT ZORBALAMAK THE KAPI
         }
     };
@@ -171,8 +171,8 @@ class ComputerLock : public Lock{
 public:
     ComputerLock(string code)
     : Lock(code) {}
-    int checkCode(string givenCode, int &basementDoor, int &labDoor){
-        if(basementDoor == 0 && labDoor == 0){
+    void checkCode(string givenCode, bool *basementDoor, bool *labDoor){
+        if(*basementDoor == false && *labDoor == false){
             cout << "\n--------------------------------------------------------------------------------" << endl;
             cout << "-     Enter the password: ___                                                  -" << endl;
             cout << "-                                                                              -" << endl;
@@ -694,7 +694,11 @@ int main() {
 	int investigateChoice;
 	int checkClock = 0, checkNotebook = 0, checkPlant = 0, door;
     string computerCode = " ";
-
+    bool basementIsOpen, labIsOpen;
+	basementIsOpen = basementLock.isOpen();
+	labIsOpen = labLock.isOpen();
+	
+	
     //BASEMENT
     
 	do{
@@ -708,7 +712,7 @@ int main() {
                 system("cls");
 				if(investigateChoice == 1) //Computer
 				{
-					computerLock.checkCode(computerCode, &basementLock.isOpen())
+					computerLock.checkCode(computerCode, &basementIsOpen, &labIsOpen);
                     addNote(personalNotes, noteBase4);
 				}
 				else if(investigateChoice == 2) //Control Notebook
