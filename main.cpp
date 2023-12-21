@@ -31,7 +31,7 @@ void alignMessages(string text)
         cout << " ";
     }
     cout << text;
-    space = 73 - text.length();
+    space = 73 - text.length(); 
     for(counter = 1; counter <= space; counter++)
     {
         cout << " ";
@@ -205,12 +205,12 @@ int printBasement() //printing menu for the room 1: Basement
 	int investigateChoice;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
 	centeredMessage("BASEMENT");
-    cout << "-     1. Desk                                                                  -" << endl;
-    cout << "-     2. Boxes                                                                 -" << endl;
-    cout << "-     3. Calendar                                                              -" << endl;
-    cout << "-     4. Door                                                                  -" << endl;
+	alignMessages("1. Desk");
+	alignMessages("2. Boxes");
+	alignMessages("3. Calendar");
+	alignMessages("4. Door");
     cout << "-                                                                              -" << endl;
-    cout << "-     0. PERSONAL NOTES                                                        -" << endl;
+    alignMessages("0. PERSONAL NOTES");
     cout << "-                                                                              -" << endl;
 	cout << "      Choose to investigate: ";
 	cin >> investigateChoice;
@@ -222,11 +222,11 @@ int printBasement_Desk() //printing menu for the desk in Basement
 	int investigateChoice;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
 	centeredMessage("DESK");
-	cout << "-     1. Computer                                                              -" << endl;
-	cout << "-     2. Control Notebook                                                      -" << endl;
-	cout << "-     3. Return Back                                                           -" << endl;
+	alignMessages("1. Computer");
+	alignMessages("2. Control Notebook");
+	alignMessages("3. Return Back");
 	cout << "-                                                                              -" << endl;
-	cout << "-     0. PERSONAL NOTES                                                        -" << endl;
+	alignMessages("0. PERSONAL NOTES");
 	cout << "-                                                                              -" << endl;
 	cout << "      Choose to investigate: ";
 	cin >> investigateChoice;
@@ -236,7 +236,7 @@ int printBasement_Desk() //printing menu for the desk in Basement
 void printBasement_ControlNotebook(string labEquipment[10]) //printing control notebook's content
 {
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	centeredMessage("EQUIPMENT");
+	centeredMessage("EQUIPMENT ");
 	for(int i=0; i < 10; i++)
 	{
 		alignMessages(labEquipment[i]);
@@ -246,7 +246,7 @@ void printBasement_ControlNotebook(string labEquipment[10]) //printing control n
 
 void printBasement_Boxes(Box boxlist[10], string equipmentList[10]){
     cout << "\n--------------------------------------------------------------------------------" << endl;
-    centeredMessage("BOXES");
+    centeredMessage("BOXES ");
         for(int i = 0; i<10;i++) {
             alignMessages(string(1, boxlist[i].getSymbol()) + " => " + equipmentList[i]);
         }
@@ -296,12 +296,12 @@ int printLab() //printing menu for the room 2: Laboratory
 	int investigateChoice;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
 	centeredMessage("LABORATORY");
-	cout << "-     1. Desk                                                                  -" << endl;
-	cout << "-     2. Lab Equipment                                                         -" << endl;
-	cout << "-     3. Clock                                                                 -" << endl;
-	cout << "-     4. Door                                                                  -" << endl;
+	alignMessages("1. Desk");
+	alignMessages("2. Lab Equipment");
+	alignMessages("3. Clock");
+	alignMessages("4. Door");
 	cout << "-                                                                              -" << endl;
-	cout << "-     0. PERSONAL NOTES                                                        -" << endl;
+	alignMessages("0. PERSONAL NOTES");
 	cout << "-                                                                              -" << endl;
 	cout << "      Choose to investigate: ";
 	cin >> investigateChoice;
@@ -313,11 +313,11 @@ int printLab_Desk() //printing menu for the desk in Laboratory
 	int investigateChoice;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
 	centeredMessage("DESK");
-	cout << "-     1. Picture Frame                                                         -" << endl;
-	cout << "-     2. Notebook                                                              -" << endl;
-	cout << "-     3. Return Back                                                           -" << endl;
+	alignMessages("1. Picture Frame");
+	alignMessages("2. Notebook");
+	alignMessages("3. Return Back");
 	cout << "-                                                                              -" << endl;
-	cout << "-     0. PERSONAL NOTES                                                        -" << endl;
+	alignMessages("0. PERSONAL NOTES");
 	cout << "-                                                                              -" << endl;
 	cout << "      Choose to investigate: ";
 	cin >> investigateChoice;
@@ -328,11 +328,11 @@ int printLab_PictureFrame()
 {
 	int investigateChoice;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-                      An old photograph of Smith family:                      -" << endl;
-	cout << "-                     Jack, Henry and their dad Richard...                     -" << endl;
+	centeredMessage("An old photograph of Smith family:");
+	centeredMessage("Jack, Henry and their dad Richard...");
 	cout << "-                                                                              -" << endl;
-	cout << "-     1. Back of the frame                                                     -" << endl;
-	cout << "-     2. Return Back                                                           -" << endl;
+	alignMessages("1. Back of the frame");
+	alignMessages("2. Return Back");
 	cout << "-                                                                              -" << endl;
 	cout << "      Choose to investigate: ";
 	cin >> 	investigateChoice;
@@ -355,21 +355,21 @@ void printLab_PictureFrame_Back()
 void printLab_CompoundNotebook()
 {
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	centeredMessage("NOTEBOOK OF COMPOUNDS");
+	centeredMessage("NOTEBOOK OF COMPOUNDS ");
 	cout << "-                                                                              -" << endl;
-	cout << "-     1. Dinitrogen Monoxide +  Iodine Trichloride                             -" << endl;
-	cout << "-     2. Iodine Trichloride + Silicon Dioxide                                  -" << endl;
-	cout << "-     3. Dinitrogen Monoxide + Silicon Dioxide                                 -" << endl;
-	cout << "-     4. Carbon Monoxide + Silicon Dioxide                                     -" << endl;
-	cout << "-     5. Carbon Monoxide + Iodine Trichloride                                  -" << endl;
+	alignMessages("1. Dinitrogen Monoxide +  Iodine Trichloride");
+	alignMessages("2. Iodine Trichloride + Silicon Dioxide");
+	alignMessages("3. Dinitrogen Monoxide + Silicon Dioxide");
+	alignMessages("4. Carbon Monoxide + Silicon Dioxide");
+	alignMessages("5. Carbon Monoxide + Iodine Trichloride");
 	cout << "--------------------------------------------------------------------------------" << endl;
 }
 
 void printLab_Clock()
 {
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-     Looks like it has been working for a long time,                          -" << endl;
-	cout << "-     but it has stopped at 3 o'clock.                                         -" << endl;
+	alignMessages("Looks like it has been working for a long time,");
+	alignMessages("but it has stopped at 3 o'clock.");
 	cout << "--------------------------------------------------------------------------------" << endl;
 }
 
@@ -416,12 +416,12 @@ void printLab_UseExpMat()
 {
 	int m1, m2;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	centeredMessage("EXPERIMENT MATERIAL");
+	centeredMessage("EXPERIMENT MATERIAL ");
 	cout << "-                                                                              -" << endl;
-	cout << "-     1. Dinitrogen Monoxide                                                   -" << endl;
-	cout << "-     2. Iodine Trichloride                                                    -" << endl;
-	cout << "-     3. Silicon Dioxide                                                       -" << endl;
-	cout << "-     4. Carbon Monoxide                                                       -" << endl;
+	alignMessages("1. Dinitrogen Monoxide");
+	alignMessages("2. Iodine Trichloride");
+	alignMessages("3. Silicon Dioxide");
+	alignMessages("4. Carbon Monoxide");
 	cout << "-                                                                              -" << endl;
 	cout << "      Choose to add to the beaker: ";
 	cin >> m1 >> m2;
@@ -433,10 +433,10 @@ int printGreenhouse()
 	int investigateChoice;		
 	cout << "\n--------------------------------------------------------------------------------" << endl;
 	centeredMessage("GREENHOUSE");
-	cout << "-     1. Security Camera                                                       -" << endl;
-	cout << "-     2. Plants                                                                -" << endl;
+	alignMessages("1. Security Camera");
+	alignMessages("2. Plants");
 	cout << "-                                                                              -" << endl;
-	cout << "-     0. PERSONAL NOTES                                                        -" << endl;
+	alignMessages("0. PERSONAL NOTES");
 	cout << "-                                                                              -" << endl;
 	cout << "      Choose to investigate: ";
 	cin >> investigateChoice;
@@ -503,7 +503,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
     centeredMessage("PERSONAL NOTES");
     cout << "-                                                                              -" << endl;
     cout << "\n--------------------------------------------------------------------------------" << endl;
-    cout << "-     BASEMENT NOTES                                                           -" << endl;
+    alignMessages("BASEMENT NOTES");
     cout << "-                                                                              -" << endl;
     if(checkNote(vec, 11) == 1)
     {
@@ -511,7 +511,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
     }
     else
     {
-        cout << "-     1. ?????????                                                             -" << endl;
+    	alignMessages("1. ?????????");
     }
     if(checkNote(vec, 12) == 1)
     {
@@ -519,7 +519,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
     }
     else
     {
-        cout << "-     2. ?????????                                                             -" << endl;
+        alignMessages("2. ?????????");
     }
     if(checkNote(vec, 13) == 1)
     {
@@ -527,7 +527,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
     }
     else
     {
-        cout << "-     3. ?????????                                                             -" << endl;
+        alignMessages("3. ?????????");
     }
     if(checkNote(vec, 14) == 1)
     {
@@ -535,10 +535,10 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
     }
     else
     {
-        cout << "-     4. ?????????                                                             -" << endl;
+        alignMessages("4. ?????????");
     }
 	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-     LABORATORY NOTES                                                         -" << endl;
+	alignMessages("LABORATORY NOTES");
 	cout << "-                                                                              -" << endl;
 	if(checkNote(vec, 21) == 1)
 	{
@@ -546,7 +546,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
 	}
 	else
 	{
-		cout << "-     1. ?????????                                                             -" << endl;
+		alignMessages("1. ?????????");
 	}
 	if(checkNote(vec, 22) == 1)
 	{
@@ -554,7 +554,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
 	}
 	else
 	{
-		cout << "-     2. ?????????                                                             -" << endl;
+		alignMessages("2. ?????????");
 	}
 	if(checkNote(vec, 23) == 1)
 	{
@@ -562,10 +562,10 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
 	}
 	else
 	{
-		cout << "-     3. ?????????                                                             -" << endl;
+		alignMessages("3. ?????????");
 	}
     cout << "\n--------------------------------------------------------------------------------" << endl;
-    cout << "-     GREENHOUSE NOTES                                                         -" << endl;
+    alignMessages("GREENHOUSE NOTES");
     cout << "-                                                                              -" << endl;
     if(checkNote(vec, 31) == 1)
     {
@@ -573,7 +573,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
     }
     else
     {
-        cout << "-     1. ?????????                                                             -" << endl;
+        alignMessages("1. ?????????");
     }
     if(checkNote(vec, 32) == 1)
     {
@@ -581,7 +581,7 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
     }
     else
     {
-        cout << "-     2. ?????????                                                             -" << endl;
+        alignMessages("2. ?????????");
     }
 }
 
