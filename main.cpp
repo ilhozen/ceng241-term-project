@@ -6,6 +6,60 @@
 using namespace std;
 const string COMPOUNDCOLOR = "Green";
 
+void centeredMessage(string text)
+{
+    int space, counter;
+    space = 78 - text.length();
+    cout << "-";
+    for(counter=1; counter<= (space/2); counter++)
+    {
+        cout << " ";
+    }
+    cout << text;
+    for(counter=1; counter<= (space/2); counter++)
+    {
+        cout << " ";
+    }
+    cout << "-" << endl;
+}
+void alignMessages(string text)
+{
+    int space, counter;
+    cout << "-";
+    for(counter = 1; counter <= 5; counter++)
+    {
+        cout << " ";
+    }
+    cout << text;
+    space = 73 - text.length();
+    for(counter = 1; counter <= space; counter++)
+    {
+        cout << " ";
+    }
+    cout << "-" << endl;
+}
+
+void alignMessagesColor(string text, int k)
+{
+    HANDLE console;
+    console = GetStdHandle(STD_OUTPUT_HANDLE);
+    int space, counter;
+    cout << "-";
+    for(counter = 1; counter <= 5; counter++)
+    {
+        cout << " ";
+    }
+    SetConsoleTextAttribute(console, k);
+    cout << text;
+    SetConsoleTextAttribute(console, 7);
+    space = 73 - text.length();
+    for(counter = 1; counter <= space; counter++)
+    {
+        cout << " ";
+    }
+    cout << "-" << endl;
+}
+
 class Item //Class for the items we will use
 {
 	private:
@@ -79,44 +133,60 @@ class Plants: public Item
 };
 
 class Lock{
-	protected:
-		int code;
-		bool opened;
-	public:
-		void setcode(int code){this->code=code;}
-		int getcode() { return code;}
-		void isOpened(int A){
-        	if (A == 1){
-            	opened = true;
-        	}else{
-            	opened = false;
-        	}
-        }
-		void check_code(string entered_code){
-			if(entered_code == "*******"){
-				isOpened(1);
-			}
-			else 
-				isOpened(0);
-		}
+protected:
+    string code;
+    int open;
+
+public:
+    Lock(string code)
+    : code(code) {open = 0;}
+    string getCode(){return code;}
+    int isOpen(){return open;}
+    virtual int checkCode(string givenCode, int &basementDoor, int &labDoor) = 0;
 };
 
-class DoorLock:public Lock{
-    private:
-		string symbol_code;
-	public:
-		void setsymbol_code(char entered_symbol) { symbol_code = entered_symbol ; }
-		string getsymbol_code() { return symbol_code ;}
-		
+class DoorLock : public Lock{
+public:
+    DoorLock(string code)
+    : Lock(code) {}
+    int checkCode(string givenCode, int &basementDoor, int &labDoor){
+        if(basementDoor == 0 && givenCode == getCode()){
+            basementDoor = 1;
+            //PRINT MESSAGE TO GO SLAY THE LAB
+        }
+        else if(basementDoor == 0 && givenCode != getCode()){
+            //DO NOT ZORBALAMAK THE KAPI
+        }
+        else if (labDoor == 0 && givenCode == getCode()){
+            labDoor = 1;
+            //PRINT MESSAGE TO GO SLAY THE GREENHOUSE
+        }
+        else if(labDoor == 0 && givenCode != getCode()){
+            //DO NOT ZORBALAMAK THE KAPI
+        }
+    };
 };
-class ComputerLock:public Lock{
-	 private:
-		string symbol_code;
-	public:
-		void setsymbol_code(char entered_symbol) { symbol_code = entered_symbol ;}
-		string getsymbol_code() { return symbol_code ;}
-		
+
+class ComputerLock : public Lock{
+public:
+    ComputerLock(string code)
+    : Lock(code) {}
+    int checkCode(string givenCode, int &basementDoor, int &labDoor){
+        if(basementDoor == 0 && labDoor == 0){
+            cout << "\n--------------------------------------------------------------------------------" << endl;
+            cout << "-     Enter the password: ___                                                  -" << endl;
+            cout << "-                                                                              -" << endl;
+            cout << "-     'Looks like i need to find the password to access camera records...'     -" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+        }
+        else{
+            cout << "\n--------------------------------------------------------------------------------" << endl;
+            alignMessages("Enter the password: " + givenCode);
+            //PRINT MESSAGE TO END THE GAME SLAY PROJECT MASALLAH
+        }
+    }
 };
+
 class Note{
 private:
     string hint;
@@ -130,60 +200,6 @@ public:
     int getId() const {return id;}
 };
 
-
-void centeredMessage(string text)
-{
-	int space, counter;
-	space = 78 - text.length();
-	cout << "-";
-	for(counter=1; counter<= (space/2); counter++)
-	{
-		cout << " ";
-	}
-	cout << text;
-	for(counter=1; counter<= (space/2); counter++)
-	{
-		cout << " ";
-	}
-	cout << "-" << endl;
-}
-void alignMessages(string text)
-{
-	int space, counter;
-	cout << "-";
-	for(counter = 1; counter <= 5; counter++)
-	{
-		cout << " ";
-	}
-	cout << text;
-	space = 73 - text.length();
-	for(counter = 1; counter <= space; counter++)
-	{
-		cout << " ";
-	}
-	cout << "-" << endl;
-}
-
-void alignMessagesColor(string text, int k)
-{
-    HANDLE console;
-    console = GetStdHandle(STD_OUTPUT_HANDLE);
-	int space, counter;
-	cout << "-";
-	for(counter = 1; counter <= 5; counter++)
-	{
-		cout << " ";
-	}
-	SetConsoleTextAttribute(console, k);
-	cout << text;
-	SetConsoleTextAttribute(console, 7);
-	space = 73 - text.length();
-	for(counter = 1; counter <= space; counter++)
-	{
-		cout << " ";
-	}
-	cout << "-" << endl;
-}
 int printBasement() //printing menu for the room 1: Basement
 {
 	int investigateChoice;
@@ -215,15 +231,6 @@ int printBasement_Desk() //printing menu for the desk in Basement
 	cout << "      Choose to investigate: ";
 	cin >> investigateChoice;
 	return investigateChoice;
-}
-
-void printBasement_Computer() //printing message for the computer (does not have the code)
-{
-	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "-     Enter the password: ___                                                  -" << endl;
-	cout << "-                                                                              -" << endl;
-	cout << "-     'Looks like i need to find the password to access camera records...'     -" << endl;
-	cout << "--------------------------------------------------------------------------------" << endl; 
 }
 
 void printBasement_ControlNotebook(string labEquipment[10]) //printing control notebook's content
@@ -611,6 +618,10 @@ int main() {
     fullNotebook.push_back(noteGreen1);
     fullNotebook.push_back(noteGreen2);
 
+    DoorLock basementLock("SOZA");
+    DoorLock labLock("2107");
+    ComputerLock computerLock("1C5");
+
 	string labEquipment[10] = {"!!!Glasses" , "Coats" , "!Volumetric flask" , "Gloves" , "Test tube" , "Microscope" , "!!!!Funnel" , "!!Beaker" , "Magnet" , "Pipette"};
 	string compounds[5] = {"1. yellow + red" , "2. blue + red" , "3. blue + yellow" , "4. brown + blue" , "5. brown + red"};
 
@@ -682,6 +693,7 @@ int main() {
 	
 	int investigateChoice;
 	int checkClock = 0, checkNotebook = 0, checkPlant = 0, door;
+    string computerCode = " ";
 
     //BASEMENT
     
@@ -696,12 +708,8 @@ int main() {
                 system("cls");
 				if(investigateChoice == 1) //Computer
 				{
-					printBasement_Computer();
+					computerLock.checkCode(computerCode, &basementLock.isOpen())
                     addNote(personalNotes, noteBase4);
-                    //personalNotes.push_back(noteBase4);
-                    for(Note p: personalNotes){
-                        cout << p.getHint()<<endl;
-                    } //Here for testing of the addnote function
 				}
 				else if(investigateChoice == 2) //Control Notebook
 				{
