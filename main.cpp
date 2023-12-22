@@ -736,14 +736,6 @@ int main() {
 	plants[4].setDate(1810);
 	plants[4].setleafNum(10);
 	
-	/*   hikaye için yazım fikri
-
-	cout << "--------------------------------------------------------------------------------" << endl;
-	cout << "-             Henry : What do you mean that you can not find him?!             -" << endl;
-	cout << "-                                [press SPACE]                                 -" << endl;
-	cout << "--------------------------------------------------------------------------------" << endl;
-	*/
-	
 	int investigateChoice;
 	int checkClock = 0, checkNotebook = 0, checkPlant = 0, door;
     string computerCode = " ";
@@ -801,16 +793,24 @@ int main() {
         {
             PersonalNotes(personalNotes, fullNotebook);
         }
+        else if(investigateChoice < 0 || investigateChoice >= 5)
+		{
+        	alignMessages("Invalid choice. Try again!");
+        	investigateChoice = 0;
+		}
 	}while(investigateChoice >= 0 && investigateChoice <= 4);
 
 	//LABORATORY
-	
+	system("cls");
 	do{
 		investigateChoice = printLab();
+		if(investigateChoice != 4)
+            system("cls");
 		if(investigateChoice == 1) //Desk
 		{
 			do{
 				investigateChoice = printLab_Desk();
+				system("cls");
 				if(investigateChoice == 1) //Picture Frame
 				{
 					do
@@ -864,6 +864,11 @@ int main() {
 		{
 			PersonalNotes(personalNotes, fullNotebook);
 		}
+		else if(investigateChoice < 0 || investigateChoice >= 5)
+		{
+        	alignMessages("Invalid choice. Try again!");
+        	investigateChoice = 0;
+		}
 	}while(investigateChoice >= 0 && investigateChoice <= 4);
 
     //GREENHOUSE
@@ -886,6 +891,11 @@ int main() {
         {
             PersonalNotes(personalNotes, fullNotebook);
         }
+        else if(investigateChoice < 0 || investigateChoice >= 3)
+		{
+        	alignMessages("Invalid choice. Try again!");
+        	investigateChoice = 0;
+		}
     }while(investigateChoice >= 0 && investigateChoice <= 2);
 
 	return 0;
