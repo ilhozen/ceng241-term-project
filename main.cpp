@@ -592,7 +592,26 @@ void addNote(vector <Note> &vector, Note note){
 }
 
 int main() {
-
+	
+	char cont;
+	cout << "--------------------------------------------------------------------------------" << endl;
+	centeredMessage("A biologist who discovered a worldwide sought-after drug... ");
+	centeredMessage("[press '*'] ");
+	cin >> cont;
+	cout << "--------------------------------------------------------------------------------" << endl;
+	centeredMessage("A brother who is after this medicine... ");
+	centeredMessage("[press '*'] ");
+	cin >> cont;
+	cout << "--------------------------------------------------------------------------------" << endl;
+	centeredMessage("A trap set to get the medicine... ");
+	centeredMessage("[press '*'] ");
+	cin >> cont;
+	cout << "--------------------------------------------------------------------------------" << endl;
+	centeredMessage("And a biologist trying to escape from this trap...");
+	centeredMessage("[press '*'] ");
+	cin >> cont;
+	cout << "--------------------------------------------------------------------------------" << endl;
+	
     vector <Note> personalNotes;
     vector <Note> fullNotebook;
     Note noteBase1("There is a date circled on the calendar: 1204", 11);
