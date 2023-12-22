@@ -60,6 +60,11 @@ void alignMessagesColor(string text, int k)
     cout << "-" << endl;
 }
 
+void printGameEnd()
+{
+	// hikaye
+}
+
 class Item //Class for the items we will use
 {
 	private:
@@ -150,16 +155,30 @@ public:
     DoorLock(string code)
     : Lock(code) {}
     void checkCode(string givenCode, bool *basementDoor, bool *labDoor){
-        if(*basementDoor == false && givenCode == getCode()){
+        if(*basementDoor == false && givenCode == getCode())
+		{
             *basementDoor = true;
-            //PRINT MESSAGE TO GO SLAY THE LAB
+            char cont;
+    		cout << "\n--------------------------------------------------------------------------------" << endl;
+    		alignMessages("You are about to enter the Lab");
+    		alignMessages("You check the back of the door and you see a number written on it: ");
+    		alignMessages("1");
+    		cout << "Press '*' to Continue: ";
+    		cin >> cont;
         }
         else if(*basementDoor == false && givenCode != getCode()){
             //DO NOT ZORBALAMAK THE KAPI
         }
-        else if (*labDoor == false && givenCode == getCode()){
+        else if (*labDoor == false && givenCode == getCode())
+		{
             *labDoor = true;
-            //PRINT MESSAGE TO GO SLAY THE GREENHOUSE
+            char cont;
+			cout << "\n--------------------------------------------------------------------------------" << endl;
+			alignMessages("You are about to enter Greenhouse");
+			alignMessages("You check the back of the door and you saw a letter written on it: ");
+			alignMessages("C");
+			cout << "Type '*' to Continue: "; //BAK BURAYA
+    		cin >> cont;
         }
         else if(*labDoor == false && givenCode != getCode()){
             //DO NOT ZORBALAMAK THE KAPI
@@ -182,7 +201,7 @@ public:
         else{
             cout << "\n--------------------------------------------------------------------------------" << endl;
             alignMessages("Enter the password: " + givenCode);
-            //PRINT MESSAGE TO END THE GAME SLAY PROJECT MASALLAH
+            printGameEnd();
         }
     }
 };
@@ -305,24 +324,13 @@ void printBasementtoLab()
     cin >> cont;
 }
 
-int printBasement_Door()
+string printBasement_Door()
 {
     string password;
     cout << "\n--------------------------------------------------------------------------------" << endl;
     cout << "      Enter the password to enter the Lab: ";
     cin >> password;
-    cout << "--------------------------------------------------------------------------------" << endl;
-    if(password == "SOZA")
-    {
-        printBasementtoLab();
-        return 1;
-    }
-    else
-    {
-        alignMessages("The password is incorrect.");
-        cout << "--------------------------------------------------------------------------------" << endl;
-        return 0;
-    }
+    return password;
 }
 
 int printLab() //printing menu for the room 2: Laboratory
@@ -484,7 +492,7 @@ void printGreenhouse_SecurityCam()
     alignMessages("'I must find the password as soon as possible to prove my innocence...'");
 }
 
-void printGreenhouse_Plants(Plants plants[5], int check)
+void printGreenhouse_Plants(Plants plants[5], int check, int * finish)
 {
     int plantChoice;
 	cout << "\n--------------------------------------------------------------------------------" << endl;
@@ -512,10 +520,11 @@ void printGreenhouse_Plants(Plants plants[5], int check)
             cout << "      The plant turned turquoise." << endl;
             cout << "\n      The plant's 5 leaves finally remind you of the final digit of the " <<endl;
             cout << "      computer password." <<endl;
+            *finish = 1;
         }
         else
         {
-            alignMessages("\n");
+        	cout << "-                                                                              -" << endl;
             alignMessages("Nothing happened.");
             alignMessages("'I should look at my notes and think carefully about this.'");
         }
@@ -531,7 +540,7 @@ int checkNote(vector <Note> vec, int a){
     return 0;
 }
 
-void PersonalNotes(vector <Note> vec, vector <Note> filled)
+void PersonalNotes(vector <Note> vec, vector <Note> filled, string code)
 {
     cout << "\n--------------------------------------------------------------------------------" << endl;
     centeredMessage("PERSONAL NOTES");
@@ -617,6 +626,8 @@ void PersonalNotes(vector <Note> vec, vector <Note> filled)
     {
         alignMessages("2. ?????????");
     }
+    cout << "\n--------------------------------------------------------------------------------" << endl;
+    alignMessages("COMPUTER PASSWORD: " + code);
 }
 
 void addNote(vector <Note> &vector, Note note){
@@ -645,6 +656,7 @@ int main() {
 	centeredMessage("[press '*'] ");
 	cin >> cont;
 	cout << "--------------------------------------------------------------------------------" << endl;
+	system("cls");
 	
     vector <Note> personalNotes;
     vector <Note> fullNotebook;
@@ -737,11 +749,13 @@ int main() {
 	plants[4].setleafNum(10);
 	
 	int investigateChoice;
-	int checkClock = 0, checkNotebook = 0, checkPlant = 0, door;
-    string computerCode = " ";
+	int checkClock = 0, checkNotebook = 0, checkPlant = 0, checkFinish = 0;
+    string userCode = " ";
     bool basementIsOpen, labIsOpen;
 	basementIsOpen = basementLock.isOpen();
 	labIsOpen = labLock.isOpen();
+	string masterCode = "???";
+	
 	
 	
     //BASEMENT
@@ -757,7 +771,7 @@ int main() {
                 system("cls");
 				if(investigateChoice == 1) //Computer
 				{
-					computerLock.checkCode(computerCode, &basementIsOpen, &labIsOpen);
+					computerLock.checkCode(masterCode, &basementIsOpen, &labIsOpen);
                     addNote(personalNotes, noteBase4);
 				}
 				else if(investigateChoice == 2) //Control Notebook
@@ -767,8 +781,13 @@ int main() {
 				}
                 else if(investigateChoice == 0) //Personal Notes
                 {
-                    PersonalNotes(personalNotes, fullNotebook);
+                    PersonalNotes(personalNotes, fullNotebook, masterCode);
                 }
+                else if(investigateChoice < 0 || investigateChoice >= 4)
+				{
+        			alignMessages("Invalid choice. Try again!");
+        			investigateChoice = 0;
+				}
 			}while(investigateChoice >= 0 && investigateChoice < 3);
 		}
         else if(investigateChoice == 2) //Boxes
@@ -783,15 +802,16 @@ int main() {
         }
         else if(investigateChoice == 4)
         {
-            door = printBasement_Door();
-            if(door == 1)
+            userCode = printBasement_Door();
+            basementLock.checkCode(userCode, &basementIsOpen, &labIsOpen);
+            if(basementIsOpen == 1)
             {
-                investigateChoice = 5;
-            }
+            	investigateChoice = 5;
+			}
         }
         else if(investigateChoice == 0) //Personal Notes
         {
-            PersonalNotes(personalNotes, fullNotebook);
+            PersonalNotes(personalNotes, fullNotebook, masterCode);
         }
         else if(investigateChoice < 0 || investigateChoice >= 5)
 		{
@@ -802,6 +822,7 @@ int main() {
 
 	//LABORATORY
 	system("cls");
+	masterCode = "1??";
 	do{
 		investigateChoice = printLab();
 		if(investigateChoice != 4)
@@ -816,11 +837,17 @@ int main() {
 					do
 					{
 						investigateChoice = printLab_PictureFrame();
+						system("cls");
 						if(investigateChoice == 1) //Back of the picture frame
 						{
 							printLab_PictureFrame_Back();
 							addNote(personalNotes, noteLab3);
-						}	
+						}
+						else if(investigateChoice <= 0 && investigateChoice >= 3)
+						{
+							alignMessages("Invalid choice. Try again!");
+        					investigateChoice = 0;
+						}		
 					}while(investigateChoice != 2);
 				}
 				else if(investigateChoice == 2) //Notebook Of Compounds
@@ -834,7 +861,12 @@ int main() {
 				}
 				else if(investigateChoice == 0) //Personal Notes
 				{
-					PersonalNotes(personalNotes, fullNotebook);
+					PersonalNotes(personalNotes, fullNotebook, masterCode);
+				}
+				else if(investigateChoice < 0 || investigateChoice >= 4)
+				{
+        			alignMessages("Invalid choice. Try again!");
+        			investigateChoice = 0;
 				}
 			}while(investigateChoice >= 0 && investigateChoice < 3);
 		}
@@ -854,25 +886,27 @@ int main() {
 		}
 		else if(investigateChoice == 4)
 		{
-			door = printLab_Door();
-			if(door == 1)
-			{
-				investigateChoice = 5;
+			userCode = printLab_Door();
+			labLock.checkCode(userCode, &basementIsOpen, &labIsOpen);
+			if(labIsOpen == 1)
+            {
+            	investigateChoice = 5;
 			}
 		}
 		else if(investigateChoice == 0) //Personal Notes
 		{
-			PersonalNotes(personalNotes, fullNotebook);
+			PersonalNotes(personalNotes, fullNotebook, masterCode);
 		}
 		else if(investigateChoice < 0 || investigateChoice >= 5)
 		{
         	alignMessages("Invalid choice. Try again!");
         	investigateChoice = 0;
 		}
-	}while(investigateChoice >= 0 && investigateChoice <= 4);
+	}while(investigateChoice >= 0 && investigateChoice < 4);
 
     //GREENHOUSE
     system("cls");
+    masterCode = "1C?";
     do{
         investigateChoice = printGreenhouse();
         addNote(personalNotes, noteGreen1);
@@ -883,13 +917,19 @@ int main() {
         }
         else if(investigateChoice == 2) //Plants
         {
-            printGreenhouse_Plants(plants, checkPlant);
+            printGreenhouse_Plants(plants, checkPlant, &checkFinish);
             addNote(personalNotes, noteGreen2);
             checkPlant = 1;
+            if(checkFinish == 1)
+            {
+            	// go back to basement cout ...
+            	masterCode = "1C5";
+            	computerLock.checkCode(masterCode, &basementIsOpen, &labIsOpen);
+			}
         }
         else if(investigateChoice == 0) //Personal Notes
         {
-            PersonalNotes(personalNotes, fullNotebook);
+            PersonalNotes(personalNotes, fullNotebook, masterCode);
         }
         else if(investigateChoice < 0 || investigateChoice >= 3)
 		{
