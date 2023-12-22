@@ -255,9 +255,43 @@ void printBasement_Boxes(Box boxlist[10], string equipmentList[10]){
 
 void printBasement_Calendar()
 {
+	HANDLE console;
+    console = GetStdHandle(STD_OUTPUT_HANDLE);
     cout << "\n--------------------------------------------------------------------------------" << endl;
-    centeredMessage("CALENDAR");
-    alignMessages("Date 12/04 is circled. Everything else seems normal.");
+	centeredMessage("APRIL ");
+	int counter = 1;
+	
+	for(int i=1; i<=30; i++)
+	{
+		cout << "-                   ";
+		while(counter != 8)
+		{
+			if(i == 12)
+			{
+				SetConsoleTextAttribute(console, 4);
+				cout << "   " << i;
+				SetConsoleTextAttribute(console, 7);
+			}
+			else if(i/10 == 0)
+			{
+				cout << "    " << i;
+			}
+			else
+			{
+				cout << "   " << i;
+			}
+			counter++;
+			i++;
+		}
+		counter = 1;
+		for(int j=1; j<=24; j++)
+		{
+			cout << " ";
+		}
+		cout << "-";
+		cout << "\n";
+	}
+	cout << "--------------------------------------------------------------------------------" << endl;	
 }
 
 void printBasementtoLab()
