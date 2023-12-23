@@ -60,21 +60,32 @@ void alignMessagesColor(string text, int k)
     cout << "-" << endl;
 }
 
-/*void printGameEnd()
+void printGameEnd()
 {
+	cout << "--------------------------------------------------------------------------------" << endl;
 	centeredMessage("[...CAMERA RECORDS...]");
-	centeredMessage("(While Patrick is struggling to breathe on the ground, Henry crouches next to him and looks at his father.)");
-	alignMessages("HENRY: This is the medicine that your favorite son Jack found, Dad... Unless you count what I added to it.");
-	alignMessages("PATRICK: Henry (cough) I've always loved you, son--");
+	cout << "-                                                                              -" << endl;
+	centeredMessage("(While Patrick is struggling to breathe on the ground,");
+	centeredMessage("Henry crouches next to him and looks at his father.)");
+	cout << "-                                                                              -" << endl;
+	alignMessages("HENRY: This is the medicine that your favorite son Jack found, Dad...    -\n"
+						"-            Unless you count what I added to it.                              ");
+	cout << "-                                                                              -" << endl;
+	alignMessages("PATRICK: Henry (cough) but I've always loved you, son--");
+	cout << "-                                                                              -" << endl;
 	alignMessages("HENRY: Even when you're on the brink of death, you're lying, Dad!");
-	alignMessages("So be quiet and listen to the fun part: ");
-	
-	alignMessages("PATRICK: Henry...boy, you...how could you do this?");
-	alignMessages("You know that once they see the drug Jack found in your system, your beautiful son will be in prison for the rest of his life, right?");
-	centeredMessages("Now Patrick lies motionless on the ground.");
-	centeredMessage("Henry cannot control his tears and stands over his father for a while longer.");
-	
-} WILL BE FIXED */  
+	alignMessages("       So be quiet and listen to the fun part: You know that once they   -\n"
+					"-            see the drug Jack found in your body, your beloved son will       -\n"
+					"-            be in prison for the rest of his life, right? What about          -\n"
+					"-            me, your son that you never loved and don't care about?           -\n"
+					"-            I will start living the best years of my life!                    ");
+	cout << "-                                                                              -" << endl;				
+	alignMessages("PATRICK: Henry... son, you... how could you do this?");
+	cout << "-                                                                              -" << endl;
+	centeredMessage("(Now Patrick lies motionless on the ground.)");
+	centeredMessage("(Henry cannot control his tears and stands over ");
+	centeredMessage("his father for a while longer.) ");
+} 
 
 class Item //Class for the items we will use
 {
@@ -177,7 +188,8 @@ public:
     		cout << "Press '*' to Continue: ";
     		cin >> cont;
         }
-        else if(*basementDoor == false && givenCode != getCode()){
+        else if(*basementDoor == false && givenCode != getCode())
+		{
         	cout << "\n--------------------------------------------------------------------------------" << endl;
             alignMessages("This doesn't seem like the right password... I should check my notes.");
         }
@@ -189,12 +201,13 @@ public:
 			alignMessages("You are about to enter Greenhouse");
 			alignMessages("You check the back of the door and you saw a letter written on it: ");
 			alignMessages("C");
-			cout << "Type '*' to Continue: "; //BAK BURAYA(??)
+			cout << "Type '*' to Continue: ";
     		cin >> cont;
         }
-        else if(*labDoor == false && givenCode != getCode()){
+        else if(*labDoor == false && givenCode != getCode())
+		{
         	cout << "\n--------------------------------------------------------------------------------" << endl;
-            alignMessages("This doesn't seem like the right password... I should check my notes."); //bu mesajı basmadan direkt seraya geçiyor!!!
+            alignMessages("This doesn't seem like the right password... I should check my notes.");
         }
     };
 };
@@ -204,6 +217,7 @@ public:
     ComputerLock(string code)
     : Lock(code) {}
     void checkCode(string givenCode, bool *basementDoor, bool *labDoor){
+    	char cont;
         if(*basementDoor == false && *labDoor == false){
             cout << "\n--------------------------------------------------------------------------------" << endl;
             cout << "-     Enter the password: ___                                                  -" << endl;
@@ -212,8 +226,12 @@ public:
             cout << "--------------------------------------------------------------------------------" << endl;
         }
         else{
+        	system("cls");
             cout << "\n--------------------------------------------------------------------------------" << endl;
+            alignMessages("(You go back to the basement to check the computer)");
             alignMessages("Enter the password: " + givenCode);
+            centeredMessage("[press '*'] ");
+            cin >> cont;
             printGameEnd();
         }
     }
@@ -435,28 +453,17 @@ void printLabtoGreenhouse()
 	alignMessages("You are about to enter Greenhouse");
 	alignMessages("You check the back of the door and you saw a letter written on it: ");
 	alignMessages("C");
-	cout << "Type '*' to Continue: "; //BAK BURAYA(??)
+	cout << "Type '*' to Continue: ";
     cin >> cont;
 }
 
-int printLab_Door()
+string printLab_Door()
 {
-	int password;
-	cout << "\n--------------------------------------------------------------------------------" << endl;
-	cout << "      Enter the password to enter Greenhouse: ";
-	cin >> password;
-	cout << "--------------------------------------------------------------------------------" << endl;
-	if(password == 2107)
-	{
-		printLabtoGreenhouse();
-		return 1;
-	}
-	else
-	{
-		alignMessages("The password is incorrect.");
-		cout << "--------------------------------------------------------------------------------" << endl;
-		return 0;
-	}
+    string password;
+    cout << "\n--------------------------------------------------------------------------------" << endl;
+    cout << "      Enter the password to enter the Greenhouse: ";
+    cin >> password;
+    return password;
 }
 
 void combine(int mat1, int mat2){
@@ -529,11 +536,14 @@ void printGreenhouse_Plants(Plants plants[5], int check, int * finish)
         cout << "      Choose the plant you want to pour the compound on: ";
         cin >> plantChoice;
         if (plantChoice == 2){
+        	char cont;
             cout << "\n      You poured the compound on the plant." << endl;
             cout << "      The plant turned turquoise." << endl;
             cout << "\n      The plant's 5 leaves finally remind you of the final digit of the " <<endl;
             cout << "      computer password." <<endl;
             *finish = 1;
+            centeredMessage("[press '*'] ");
+            cin >> cont;
         }
         else
         {
@@ -671,12 +681,13 @@ int main() {
 	cout << "--------------------------------------------------------------------------------" << endl;
 	system("cls");
 	
+	cout << "--------------------------------------------------------------------------------" << endl;
 	centeredMessage(" ...MEANWHILE IN THE BASEMENT OF JACK'S HOUSE...");
 	cout << "--------------------------------------------------------------------------------" << endl;
 	alignMessages("JACK: What do you mean... you killed our father?");
-	cout << "\n";
+	cout << "-                                                                              -" << endl;
 	alignMessages("HENRY: You can't blame me, this is all your fault!");
-	cout << "\n";
+	cout << "-                                                                              -" << endl;
 	alignMessages("JACK: You're out of your mind, Henry. ");
 	cout << "--------------------------------------------------------------------------------" << endl;
 	cout << "--------------------------------------------------------------------------------" << endl;
@@ -916,7 +927,7 @@ int main() {
 		{
 			userCode = printLab_Door();
 			labLock.checkCode(userCode, &basementIsOpen, &labIsOpen);
-			if(labIsOpen == 1)
+			if(labIsOpen == true)
             {
             	investigateChoice = 5;
 			}
@@ -930,7 +941,7 @@ int main() {
         	alignMessages("Invalid choice. Try again!");
         	investigateChoice = 0;
 		}
-	}while(investigateChoice >= 0 && investigateChoice < 4);
+	}while(investigateChoice >= 0 && investigateChoice <= 4);
 
     //GREENHOUSE
     system("cls");
@@ -950,9 +961,9 @@ int main() {
             checkPlant = 1;
             if(checkFinish == 1)
             {
-            	// go back to basement cout ...
             	masterCode = "1C5";
             	computerLock.checkCode(masterCode, &basementIsOpen, &labIsOpen);
+            	return 0;
 			}
         }
         else if(investigateChoice == 0) //Personal Notes
