@@ -60,10 +60,21 @@ void alignMessagesColor(string text, int k)
     cout << "-" << endl;
 }
 
-void printGameEnd()
+/*void printGameEnd()
 {
-	// hikaye
-}
+	centeredMessage("[...CAMERA RECORDS...]");
+	centeredMessage("(While Patrick is struggling to breathe on the ground, Henry crouches next to him and looks at his father.)");
+	alignMessages("HENRY: This is the medicine that your favorite son Jack found, Dad... Unless you count what I added to it.");
+	alignMessages("PATRICK: Henry (cough) I've always loved you, son--");
+	alignMessages("HENRY: Even when you're on the brink of death, you're lying, Dad!");
+	alignMessages("So be quiet and listen to the fun part: ");
+	
+	alignMessages("PATRICK: Henry...boy, you...how could you do this?");
+	alignMessages("You know that once they see the drug Jack found in your system, your beautiful son will be in prison for the rest of his life, right?");
+	centeredMessages("Now Patrick lies motionless on the ground.");
+	centeredMessage("Henry cannot control his tears and stands over his father for a while longer.");
+	
+} WILL BE FIXED */  
 
 class Item //Class for the items we will use
 {
@@ -167,7 +178,8 @@ public:
     		cin >> cont;
         }
         else if(*basementDoor == false && givenCode != getCode()){
-            //DO NOT ZORBALAMAK THE KAPI
+        	cout << "\n--------------------------------------------------------------------------------" << endl;
+            alignMessages("This doesn't seem like the right password... I should check my notes.");
         }
         else if (*labDoor == false && givenCode == getCode())
 		{
@@ -177,11 +189,12 @@ public:
 			alignMessages("You are about to enter Greenhouse");
 			alignMessages("You check the back of the door and you saw a letter written on it: ");
 			alignMessages("C");
-			cout << "Type '*' to Continue: "; //BAK BURAYA
+			cout << "Type '*' to Continue: "; //BAK BURAYA(??)
     		cin >> cont;
         }
         else if(*labDoor == false && givenCode != getCode()){
-            //DO NOT ZORBALAMAK THE KAPI
+        	cout << "\n--------------------------------------------------------------------------------" << endl;
+            alignMessages("This doesn't seem like the right password... I should check my notes."); //bu mesajı basmadan direkt seraya geçiyor!!!
         }
     };
 };
@@ -422,7 +435,7 @@ void printLabtoGreenhouse()
 	alignMessages("You are about to enter Greenhouse");
 	alignMessages("You check the back of the door and you saw a letter written on it: ");
 	alignMessages("C");
-	cout << "Type '*' to Continue: "; //BAK BURAYA
+	cout << "Type '*' to Continue: "; //BAK BURAYA(??)
     cin >> cont;
 }
 
@@ -656,6 +669,21 @@ int main() {
 	centeredMessage("[press '*'] ");
 	cin >> cont;
 	cout << "--------------------------------------------------------------------------------" << endl;
+	system("cls");
+	
+	centeredMessage(" ...MEANWHILE IN THE BASEMENT OF JACK'S HOUSE...");
+	cout << "--------------------------------------------------------------------------------" << endl;
+	alignMessages("JACK: What do you mean... you killed our father?");
+	cout << "\n";
+	alignMessages("HENRY: You can't blame me, this is all your fault!");
+	cout << "\n";
+	alignMessages("JACK: You're out of your mind, Henry. ");
+	cout << "--------------------------------------------------------------------------------" << endl;
+	cout << "--------------------------------------------------------------------------------" << endl;
+	centeredMessage(" (Henry leaves the basement in a rage and locks the door.)");
+	centeredMessage(" (Jack slowly loses consciousness and forgets what just happened...)");
+	centeredMessage("[press '*'] ");
+	cin >> cont;
 	system("cls");
 	
     vector <Note> personalNotes;
