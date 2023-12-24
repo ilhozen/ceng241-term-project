@@ -139,39 +139,44 @@ void printBasement_Calendar()
     HANDLE console;
     console = GetStdHandle(STD_OUTPUT_HANDLE);
     cout << "\n--------------------------------------------------------------------------------" << endl;
+    cout << "-                                                                              -\n";
     centeredMessage("APRIL ");
-    int counter = 1;
-
+    centeredMessage("--------------------------");
+    centeredMessage("Mo  Tu  We  Th  Fr  Sa  Su");
+    cout << "-                        ";
     for(int i=1; i<=30; i++)
-    {
-        cout << "-                   ";
-        while(counter != 8)
-        {
-            if(i == 12)
+	{
+		if(i == 12)
             {
                 SetConsoleTextAttribute(console, 4);
-                cout << "   " << i;
+                cout << "  " << i;
                 SetConsoleTextAttribute(console, 7);
             }
-            else if(i/10 == 0)
-            {
-                cout << "    " << i;
-            }
-            else
-            {
-                cout << "   " << i;
-            }
-            counter++;
-            i++;
-        }
-        counter = 1;
-        for(int j=1; j<=24; j++)
-        {
-            cout << " ";
-        }
-        cout << "-";
-        cout << "\n";
-    }
+        else if(i % 7 == 0)
+		{
+			if(i / 10 == 0)
+			{
+				cout << "   " << i << "                          -\n";
+				cout << "-                        ";
+			}
+			else if(i / 10 != 0)
+			{
+				cout << "  " << i << "                          -\n";
+				cout << "-                        ";
+			}
+		}
+		else if(i / 10 == 0)
+		{
+			cout << "   " << i;
+		}
+		else if(i / 10 != 0)
+		{
+			cout << "  " << i;
+		}
+	}
+	cout << "                                              -\n";
+	centeredMessage("--------------------------");
+	cout << "-                                                                              -\n";
     cout << "--------------------------------------------------------------------------------" << endl;
 }
 
