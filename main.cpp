@@ -149,7 +149,7 @@ int main() {
 	plants[4].setleafNum(10);
 	
 	int investigateChoice;
-	int checkClock = 0, checkNotebook = 0, checkPlant = 0, checkFinish = 0;
+	int checkClock = 0, checkNotebook = 0, checkPlant = 0, checkFinish = 0, checkControlNotebook = 0, checkBoxes = 0;
     string userCode = " ";
     bool basementIsOpen, labIsOpen;
 	basementIsOpen = basementLock.isOpen();
@@ -176,6 +176,11 @@ int main() {
 				{
 					printBasement_ControlNotebook(labEquipment);
                     addNote(personalNotes, noteBase2);
+                    checkControlNotebook = 1;
+                    if(checkBoxes == 1)
+                    {
+                        addNote(personalNotes, noteBase3);
+                    }
 				}
                 else if(investigateChoice == 0) //Personal Notes
                 {
@@ -191,10 +196,11 @@ int main() {
         else if(investigateChoice == 2) //Boxes
         {
             printBasement_Boxes(boxes, boxEquipment);
-            if (checkNote(personalNotes, 12)){
+            checkBoxes = 1;
+            if (checkControlNotebook == 1)
+            {
                 addNote(personalNotes, noteBase3);
             }
-
         }
         else if(investigateChoice == 3) //Calendar
         {

@@ -6,10 +6,10 @@ using namespace std;
 class Item //Class for the items we will use
 {
 protected:
-    string Name;
+    string name;
 public:
-    void setName(string name) { Name = name; }
-    string getName() { return Name; }
+    void setName(string namee) { name = namee; }
+    string getName() { return name; }
 };
 
 #endif //CENG241_TERM_PROJECT_ITEM_H
