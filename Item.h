@@ -5,7 +5,7 @@ using namespace std;
 
 class Item //Class for the items we will use
 {
-private:
+protected:
     string Name;
 public:
     void setName(string name) { Name = name; }

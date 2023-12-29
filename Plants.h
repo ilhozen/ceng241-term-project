@@ -9,14 +9,12 @@ class Plants: public Item
 {
 private:
     int leafNum, date;
-    string color, name;
+    string color;
 public:
     void setColor(string Color){ color = Color; }
     void setDate(int Date){ date = Date; }
     void setleafNum(int LeafNum){ leafNum = LeafNum; }
-    void setName(string Name){ name = Name; }
 
-    string getName() { return name;}
     string getColor() { return color;}
     int getLeafNum() { return leafNum;}
     int getDate() { return date;}

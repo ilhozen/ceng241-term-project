@@ -83,6 +83,7 @@ int main() {
     ComputerLock computerLock("1C5");
 
 	string labEquipment[10] = {"!!!Glasses" , "Coats" , "!Volumetric flask" , "Gloves" , "Test tube" , "Microscope" , "!!!!Funnel" , "!!Beaker" , "Magnet" , "Pipette"};
+    string boxEquipment[10] = {"Glasses" , "Coats" , "Volumetric flask" , "Gloves" , "Test tube" , "Microscope" , "Funnel" , "Beaker" , "Magnet" , "Pipette"};
 	string compounds[5] = {"1. yellow + red" , "2. blue + red" , "3. blue + yellow" , "4. brown + blue" , "5. brown + red"};
 
     Box boxes[10];
@@ -108,7 +109,11 @@ int main() {
 	
 	Page controlNotebook;
 	Page notebookOfCompounds;
-	
+
+    for(int i = 0 ; i < 10 ; i++){
+        boxes[i].setName(boxEquipment[i]);
+    }
+
 	for(int i = 0 ; i < 10 ; i++){
 		controlNotebook.setText(labEquipment[i]);
 	}
@@ -185,10 +190,13 @@ int main() {
 		}
         else if(investigateChoice == 2) //Boxes
         {
-            printBasement_Boxes(boxes, labEquipment);
-            addNote(personalNotes, noteBase3);
+            printBasement_Boxes(boxes, boxEquipment);
+            if (checkNote(personalNotes, 12)){
+                addNote(personalNotes, noteBase3);
+            }
+
         }
-        else if(investigateChoice == 3) //Boxes
+        else if(investigateChoice == 3) //Calendar
         {
             printBasement_Calendar();
             addNote(personalNotes, noteBase1);
