@@ -238,7 +238,7 @@ int printLab_PictureFrame()
     int investigateChoice;
     cout << "\n--------------------------------------------------------------------------------" << endl;
     centeredMessage("An old photograph of Smith family:");
-    centeredMessage("Jack, Henry and their dad Richard...");
+    centeredMessage("Jack, Henry and their dad Patrick...");
     cout << "-                                                                              -" << endl;
     alignMessages("1. Back of the frame");
     alignMessages("2. Return Back");

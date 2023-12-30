@@ -49,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/ilayd/Documents/GitHub/ceng241-term-project/cmake-build-debug",
-		"source" : "C:/Users/ilayd/Documents/GitHub/ceng241-term-project"
+		"build" : "C:/Users/Corey/Documents/GitHub/ceng241-term-project/cmake-build-debug",
+		"source" : "C:/Users/Corey/Documents/GitHub/ceng241-term-project"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 6
+		"minor" : 5
 	}
 }
